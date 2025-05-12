@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/css/navstyle.css">
+<link rel="stylesheet" href="/css/footstyle.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillLink - Home</title>
+    <link rel="stylesheet" href="/css/homestyle.css">
+    <link rel="stylesheet" href="/css/navstyle.css">
+    <link rel="stylesheet" href="/css/footstyle.css">
+</head>
+<body>
+<%- include("partials/navbar") %>
+    <!-- <script src="/js/server.js" defer></script> -->
+    <header>
+        <div id="navbar"></div>
+    </header>
+    <section class="home-services">
+        <div class="left-section">
+            <h1>Services You Need, Products You Trust</h1>
+            <h3>What are you looking for?</h3>
+            <div class="services-grid">
+                <a href="/services#general-electrician" class="service-box"><img src="/images/electrician.jpeg" alt="Electrician"><p>Electrician</p></a>
+                <a href="/services#plumbing" class="service-box"><img src="/images/plumbing.jpeg" alt="Plumber"><p>Plumber</p></a>
+                <a href="/services#carpentry" class="service-box"><img src="/images/carpenter.jpeg" alt="Carpenter"><p>Carpenter</p></a>
+                <a href="/services#mechanic" class="service-box"><img src="/images/mechanic.jpeg" alt="Mechanic"><p>Mechanic</p></a>
+                <a href="/services#painting" class="service-box"><img src="/images/painter.jpeg" alt="Painter"><p>Painter</p></a>
+                <a href="/services#driver" class="service-box"><img src="/images/driver.jpeg" alt="Driver"><p>Driver</p></a>
+                <a href="/supplies" class="product-box"><img src="/images/buyparts.jpeg" alt="Buy Products"><p>Buy Electrical/Carpenter/Plumbing/Mechanical Parts</p></a>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="image-grid">
+                <img src="/images/right1.jpeg" alt="Service Image">
+                <img src="/images/right2.jpg.webp" alt="Service Image">
+                <img src="/images/right3.png.webp" alt="Service Image">
+                <img src="/images/right4.png" alt="Service Image">
+            </div>
+        </div>
+    </section>
+    <section class="how-it-works">
+        <div class="satisfaction">
+            <h2>Your Satisfaction, <span class="highlight">Guaranteed</span></h2>
+            <div class="satisfaction-grid">
+                <div class="satisfaction-item">
+                    <div>
+                        <h3>Verified Workers</h3>
+                        <p>All workers undergo background verification, ensuring you get trusted professionals for your tasks.</p>
+                    </div>
+                </div>
+                <div class="satisfaction-item">
+                    <div>
+                        <h3>Trusted Sellers</h3>
+                        <p>Compare and purchase spare parts at the best prices from nearby sellers for quality and affordability.</p>
+                    </div>
+                </div>
+                <div class="satisfaction-item">
+                    <div>
+                        <h3>Reliable Support</h3>
+                        <p>We’re here for you every day of the week. Need help? Our support team is always ready to assist.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="how-it-works-container">
+            <div class="how-it-works-image">
+                <!-- Add your image here -->
+                <img src="/images/howitworks1.jpeg" alt="How it Works">
+            </div>
+            <div class="how-it-works-content">
+                <h3>How It Works</h3>
+                <div class="steps">
+                    <div class="step"><span>1️⃣</span> Choose a Service or Product – Select a worker or request parts from sellers.</div>
+                    <div class="step"><span>2️⃣</span> Compare & Connect – Check worker reviews or compare seller prices.</div>
+                    <div class="step"><span>3️⃣</span> Schedule & Confirm – Book a worker or finalize a purchase.</div>
+                    <div class="step"><span>4️⃣</span> Pay Securely – Complete payment for service or product.</div>
+                    <div class="step"><span>5️⃣</span> Review & Feedback – Share your experience to help others.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Become a Pro Section -->
+<section class="become-a-pro">
+    <div class="pro-container">
+        <!-- Left Side: Text Content -->
+        <div class="pro-text">
+            <h2>Join SkillLink as a Service Professional</h2>
+            <p>Are you an expert in electrical work, plumbing, carpentry, or other skilled trades? Get direct job requests, set your rates, and manage your work schedule through SkillLink. Work with verified customers and receive secure payments.</p>
+            <ul>
+                <li>✔ Find nearby job opportunities</li>
+                <li>✔ Get paid securely online</li>
+                <li>✔ Build your reputation with customer reviews</li>
+            </ul>
+            <a href="/register-worker" class="cta-button">Join as a Pro</a>
+        </div>
+        <!-- Right Side: Image -->
+        <div class="pro-image">
+            <img src="/images/becomeapro2.png" alt="Skilled Worker">
+        </div>
+    </div>
+</section>
+
+<!-- Become a Seller Section -->
+<section class="become-a-seller">
+    <div class="seller-container">
+        <!-- Left Side: Text Content -->
+        <div class="seller-text">
+            <h2>Sell Tools & Parts to Workers and Customers</h2>
+            <p>Are you a shop owner or seller of home repair materials? SkillLink helps you reach both workers who need supplies and customers looking for quality repair parts. Offer competitive prices, manage requests, and grow your business.</p>
+            <ul>
+                <li>✔ Sell to both professionals and direct customers</li>
+                <li>✔ Get price requests and provide instant quotes</li>
+                <li>✔ Offer local pickup or doorstep delivery</li>
+            </ul>
+            <a href="/register-seller" class="cta-button">Start Selling</a>
+        </div>
+        <!-- Right Side: Image -->
+        <div class="seller-image">
+            <img src="/images/becomeaseller1.avif" alt="Sell Tools">
+        </div>
+    </div>
+</section>
+
+
+    <footer>
+        <div id="footer"></div>
+    </footer>
+    
+    <script src="/js/script.js" ></script>
+    <script>(function(){/* Cloudflare script */})();</script>
+<%- include("partials/footer") %>
+</body>
+</html>

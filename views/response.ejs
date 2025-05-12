@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Selection | SkillLink</title>
+    <link rel="stylesheet" href="/css/navstyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #f8f9fa, #e3f2fd);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar { position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #ff9800, #e65100);
+            color: #fff;
+            border-radius: 12px 12px 0 0;
+            margin: -30px -30px 30px;
+        }
+        .header h1 { font-size: 28px; margin: 0; }
+        .worker-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .worker-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #4CAF50;
+            transition: transform 0.3s;
+        }
+        .worker-card:hover { transform: translateY(-5px); }
+        .worker-card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; }
+        .worker-card h3 { margin: 10px 0; color: #ff9800; }
+        .worker-card p { margin: 5px 0; }
+        .action-buttons { margin-top: 15px; display: flex; gap: 10px; }
+        .action-buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .request-btn { background: #4CAF50; color: #fff; }
+        .request-btn:hover { background: #388E3C; }
+        .send-all-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 40px;
+            background: #ff9800;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .send-all-btn:hover { background: #e65100; }
+    </style>
+</head>
+<body>
+    <%- include("partials/navbar") %>
+    <div class="container">
+        <div class="header">
+            <h1>Select a Worker for <%= serviceRequest.service_type %></h1>
+            <p>Review and choose a worker or send requests to all available workers.</p>
+        </div>
+        <div class="worker-list">
+            <% if (workers.length === 0) { %>
+                <p>No workers available for this service at the moment.</p>
+            <% } else { %>
+                <% workers.forEach(worker => { %>
+                    <div class="worker-card" data-worker-id="<%= worker._id %>">
+    <img src="<%= worker.profilePhoto || '/images/default-profile.png' %>" alt="<%= worker.firstName %> <%= worker.lastName %>">
+    <h3><%= worker.firstName %> <%= worker.lastName %></h3>
+    <p><strong>Experience:</strong> <%= worker.yearsOfExperience %> years</p>
+    <p><strong>Description:</strong> <%= worker.description || 'No description provided' %></p>
+    <p><strong>Sub-Skills:</strong> <%= worker.electricianSubSkills || 'N/A' %></p>
+    <p><strong>Price Range:</strong> <%= worker.priceRange || 'Not specified' %></p>
+    <p><strong>Rating:</strong> <%= worker.rating !== undefined ? worker.rating.toFixed(1) : 'N/A' %></p>
+    <p><strong>Location:</strong> <%= worker.address %></p>
+    <div class="action-buttons">
+        <button class="request-btn" onclick="sendRequest('<%= worker._id %>')">Send Request</button>
+    </div>
+</div>
+                <% }) %>
+            <% } %>
+        </div>
+        <% if (workers.length > 0) { %>
+            <button class="send-all-btn" onclick="sendRequestToAll()">Send Request to All</button>
+        <% } %>
+    </div>
+    <%- include("partials/footer") %>
+
+<script>
+    const serviceRequestId = '<%= serviceRequestId %>';
+
+    function sendRequest(workerId) {
+        fetch('/send-request', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ workerIds: [workerId], serviceRequestId })
+        }).then(res => res.json()).then(data => {
+            if (data.success) {
+                alert('Request sent successfully!');
+                window.location.href = '/customer_dashboard';
+            } else {
+                alert('Error sending request: ' + (data.error || 'Unknown error'));
+            }
+        }).catch(err => {
+            console.error('Error:', err);
+            alert('Error sending request: Network error');
+        });
+    }
+
+    function sendRequestToAll() {
+        const workerIds = Array.from(document.querySelectorAll('.worker-card')).map(card => card.getAttribute('data-worker-id'));
+        fetch('/send-request', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ workerIds, serviceRequestId })
+        }).then(res => res.json()).then(data => {
+            if (data.success) {
+                alert('Requests sent to all workers successfully!');
+                window.location.href = '/customer_dashboard';
+            } else {
+                alert('Error sending requests: ' + (data.error || 'Unknown error'));
+            }
+        }).catch(err => {
+            console.error('Error:', err);
+            alert('Error sending requests: Network error');
+        });
+    }
+</script>
+</body>
+</html>

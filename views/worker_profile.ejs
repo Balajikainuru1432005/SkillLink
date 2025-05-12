@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Profile</title>
+    <link rel="stylesheet" href="/css/worker_profile.css">
+</head>
+<body>
+    <!-- Define subSkills at the top -->
+    <% 
+        let subSkills = [];
+        if (userProfile.electricianSubSkills) {
+            try {
+                const parsedSkills = JSON.parse(userProfile.electricianSubSkills);
+                if (Array.isArray(parsedSkills)) {
+                    subSkills = parsedSkills;
+                }
+            } catch (e) {
+                console.error('Error parsing electricianSubSkills:', e);
+            }
+        }
+    %>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Worker Portal</h2>
+        <div class="menu-item active">Profile</div>
+        <a href="/worker_dashboard" class="menu-item">Dashboard</a>
+        <a href="/logout" class="menu-item">Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <h1>Worker Profile</h1>
+        </header>
+
+        <div id="profile-content">
+            <!-- Display Section -->
+            <div id="profile-display">
+                <div class="worker-image-container">
+                    <img id="worker-image" src="<%= userProfile.profilePhoto || '/images/default-profile.png' %>" alt="Worker Image" class="worker-image">
+                </div>
+                <div class="profile-section">
+                    <h3>Personal Information</h3>
+                    <p><strong>Name:</strong> <span id="worker-name"><%= userProfile.firstName %> <%= userProfile.lastName %></span></p>
+                    <p><strong>Email:</strong> <span id="worker-email"><%= userProfile.email %></span></p>
+                    <p><strong>Phone:</strong> <span id="worker-contact"><%= userProfile.phone %></span></p>
+                    <p><strong>Address:</strong> <span id="worker-address"><%= userProfile.flat %>, <%= userProfile.area %>, <%= userProfile.landmark %>, <%= userProfile.town %>, <%= userProfile.state %> - <%= userProfile.pincode %>, <%= userProfile.district %></span></p>
+                </div>
+                <div class="profile-section">
+                    <h3>Professional Information</h3>
+                    <p><strong>Primary Skill:</strong> <span id="worker-primary-skill"><%= userProfile.primarySkill %></span></p>
+                    <p><strong>Years of Experience:</strong> <span id="worker-experience"><%= userProfile.yearsOfExperience %></span></p>
+                    <% if (userProfile.professionalPhone) { %>
+                        <p><strong>Professional Phone:</strong> <span id="worker-professional-phone"><%= userProfile.professionalPhone %></span></p>
+                    <% } %>
+                    <% if (userProfile.professionalEmail) { %>
+                        <p><strong>Professional Email:</strong> <span id="worker-professional-email"><%= userProfile.professionalEmail %></span></p>
+                    <% } %>
+                    <p><strong>Work Timing:</strong> <span id="worker-work-timing"><%= userProfile.workTiming %></span></p>
+                    <% if (userProfile.electricianSubSkills) { %>
+                        <% if (subSkills.length > 0) { %>
+                            <p><strong>Electrician Sub-Skills:</strong> <span id="worker-sub-skills"><%= subSkills.join(', ') %></span></p>
+                        <% } else { %>
+                            <p><strong>Electrician Sub-Skills:</strong> <span id="worker-sub-skills">None</span></p>
+                        <% } %>
+                    <% } %>
+                    <p><strong>Description:</strong> <span id="worker-description"><%= userProfile.description || 'No description provided' %></span></p>
+                </div>
+                <button id="edit-profile-btn" class="edit-btn">Edit Profile</button>
+            </div>
+
+            <!-- Edit Section -->
+            <div id="profile-edit" class="hidden">
+                <div class="worker-image-container">
+                    <img id="edit-worker-image" src="<%= userProfile.profilePhoto || '/images/default-profile.png' %>" alt="Worker Image" class="worker-image">
+                    <input type="file" id="worker-image-upload" accept="image/jpeg,image/png" style="margin-top: 10px;">
+                </div>
+                <form id="edit-form">
+                    <div class="profile-section">
+                        <h3>Edit Personal Information</h3>
+                        <label for="edit-worker-first-name">First Name:</label>
+                        <input type="text" id="edit-worker-first-name" name="firstName" value="<%= userProfile.firstName %>">
+                        
+                        <label for="edit-worker-last-name">Last Name:</label>
+                        <input type="text" id="edit-worker-last-name" name="lastName" value="<%= userProfile.lastName %>">
+                        
+                        <label for="edit-worker-email">Email:</label>
+                        <input type="email" id="edit-worker-email" name="email" value="<%= userProfile.email %>">
+                        
+                        <label for="edit-worker-contact">Phone:</label>
+                        <input type="text" id="edit-worker-contact" name="phone" value="<%= userProfile.phone %>">
+                        
+                        <label for="edit-worker-flat">Flat/House No:</label>
+                        <input type="text" id="edit-worker-flat" name="flat" value="<%= userProfile.flat %>">
+                        
+                        <label for="edit-worker-area">Area/Street:</label>
+                        <input type="text" id="edit-worker-area" name="area" value="<%= userProfile.area %>">
+                        
+                        <label for="edit-worker-landmark">Landmark:</label>
+                        <input type="text" id="edit-worker-landmark" name="landmark" value="<%= userProfile.landmark %>">
+                        
+                        <label for="edit-worker-town">Town/City:</label>
+                        <input type="text" id="edit-worker-town" name="town" value="<%= userProfile.town %>">
+                        
+                        <label for="edit-worker-state">State:</label>
+                        <input type="text" id="edit-worker-state" name="state" value="<%= userProfile.state %>">
+                        
+                        <label for="edit-worker-pincode">Pincode:</label>
+                        <input type="text" id="edit-worker-pincode" name="pincode" value="<%= userProfile.pincode %>">
+                        
+                        <label for="edit-worker-district">District:</label>
+                        <input type="text" id="edit-worker-district" name="district" value="<%= userProfile.district %>">
+                    </div>
+                    <div class="profile-section">
+                        <h3>Edit Professional Information</h3>
+                        <label for="edit-worker-primary-skill">Primary Skill:</label>
+                        <input type="text" id="edit-worker-primary-skill" name="primarySkill" value="<%= userProfile.primarySkill %>">
+                        
+                        <label for="edit-worker-experience">Years of Experience:</label>
+                        <input type="text" id="edit-worker-experience" name="yearsOfExperience" value="<%= userProfile.yearsOfExperience %>">
+                        
+                        <label for="edit-worker-professional-phone">Professional Phone:</label>
+                        <input type="text" id="edit-worker-professional-phone" name="professionalPhone" value="<%= userProfile.professionalPhone || '' %>">
+                        
+                        <label for="edit-worker-professional-email">Professional Email:</label>
+                        <input type="email" id="edit-worker-professional-email" name="professionalEmail" value="<%= userProfile.professionalEmail || '' %>">
+                        
+                        <label for="edit-worker-work-timing">Work Timing:</label>
+                        <input type="text" id="edit-worker-work-timing" name="workTiming" value="<%= userProfile.workTiming %>">
+                        
+                        <% if (userProfile.electricianSubSkills) { %>
+                            <label for="edit-worker-sub-skills">Electrician Sub-Skills (comma-separated):</label>
+                            <input type="text" id="edit-worker-sub-skills" name="electricianSubSkills" value="<%= subSkills.length > 0 ? subSkills.join(', ') : '' %>">
+                        <% } %>
+                        
+                        <label for="edit-worker-description">Description:</label>
+                        <input type="text" id="edit-worker-description" name="description" value="<%= userProfile.description || '' %>">
+                    </div>
+                    <button type="submit" class="save-btn">Save Changes</button>
+                    <button type="button" id="cancel-edit-btn" class="cancel-btn">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/worker_profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/css/navstyle.css">
+<link rel="stylesheet" href="/css/footstyle.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home Electrical Upgrades | SkilLink</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<%- include("partials/navbar") %>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background-image: url(https://thearchitecturedesigns.com/wp-content/uploads/2021/04/electrical-contractor-5-759x500.jpg);width: max;border-image-repeat:no-repeate;background-size: cover;">
+        <div class="hero-container">
+            <h1>Smart Home Electrical Upgrades</h1>
+            <p>Upgrade your home with smart electrical solutions for convenience and efficiency.</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <div class="main-content">
+        <section class="features">
+            <div class="features-container">
+                <div class="feature-card">
+                    <h3 class="work">Smart Home Electrical Upgrades</h3>
+                </div>
+                <div class="feature-card">
+                    <p class="breifing">Transform your home with smart lighting, switches, and automation systems.</p>
+                </div>
+                <div>
+                    <ul class="description">
+                        <li>Installation of smart lighting systems</li>
+                        <li>Smart switch and outlet installations</li>
+                        <li>Home automation setup</li>
+                        <li>Integration with voice assistants (Alexa, Google Home)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section id="booking" class="booking">
+            <div class="booking-container">
+                <div class="booking-form">
+                    <h2>Book Your Smart Home Electrical Upgrades</h2>
+                    <form id="smartHomeForm">
+                        <div class="form-group">
+                            <label for="zipcode">ZIP Code</label>
+                            <input type="text" id="zipcode" required placeholder="Enter your ZIP code" maxlength="6" pattern="\d{6}" title="Please enter a 6-digit ZIP code">
+                        </div>
+                        <div class="form-group">
+                            <label for="service-type">Type of Service</label>
+                            <select id="service-type" required>
+                                <option value="">Select Service Type</option>
+                                <option value="smart-lighting">Smart Lighting Installation</option>
+                                <option value="smart-switches">Smart Switches & Outlets</option>
+                                <option value="home-automation">Home Automation Setup</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Preferred Date</label>
+                            <input type="date" id="date" required min="<?php echo date('Y-m-d'); ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Preferred Time</label>
+                            <select id="time" required>
+                                <option value="">Select time slot</option>
+                                <option value="morning">Morning (8am - 12pm)</option>
+                                <option value="afternoon">Afternoon (12pm - 4pm)</option>
+                                <option value="evening">Evening (4pm - 8pm)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="service-details">Describe Your Requirement</label>
+                            <textarea id="service-details" rows="4" placeholder="Mention details like devices to be installed, automation preferences, etc." required></textarea>
+                        </div>
+                        <div class="price-calculator">
+                            <h3>Estimated Price</h3>
+                            <p>Starting from ₹2999</p>
+                            <small>Final price may vary based on the scope of work.</small>
+                        </div>
+                        <button type="submit" class="submit-button">Book Now</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <h2>How SkilLink Works</h2>
+        <div class="steps">
+            <div class="step">
+                <img src="calender.png" alt="Pick a Time">
+                <h3>Choose Your Service</h3>
+                <p>Select the type of smart home upgrade you need.</p>
+            </div>
+            <div class="step">
+                <img src="booking.png" alt="Book Instantly">
+                <h3>Confirm Booking</h3>
+                <p>Get responses from professional electricians and confirm your appointment.</p>
+            </div>
+            <div class="step">
+                <img src="pro1.png" alt="Your Electrician Arrives">
+                <h3>Your Electrician Arrives</h3>
+                <p>A certified electrician will arrive on time with the necessary tools.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="hero1">
+        <div class="hero-container">
+            <a href="#booking" class="nav-button">Book Now</a>
+        </div>
+    </section>
+
+    <!-- Features1 -->
+    <section class="features_1">
+        <div class="features-container_1">
+            <div class="feature-card_1">
+                <div class="feature-icon_1">⚡</div>
+                <h3>Expert Electrical Work</h3>
+                <p>Our professionals ensure safety and efficiency in all installations.</p>
+            </div>
+            <div class="feature-card_1">
+                <div class="feature-icon_1">🔌</div>
+                <h3>Certified & Trusted</h3>
+                <p>All our electricians are highly experienced and certified.</p>
+            </div>
+            <div class="feature-card_1">
+                <div class="feature-icon_1">⏳</div>
+                <h3>Same-Day Service</h3>
+                <p>Book today and get your installation done as soon as today.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('smartHomeForm');
+            const zipcodeInput = document.getElementById('zipcode');
+            const dateInput = document.getElementById('date');
+            const serviceType = document.getElementById('service-type');
+            const priceDisplay = document.querySelector('.price-calculator p');
+
+            // Set minimum date to today
+            dateInput.min = new Date().toISOString().split('T')[0];
+
+            // ZIP code validation
+            zipcodeInput.addEventListener('input', function() {
+                this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);
+            });
+
+            // Dynamic price calculation
+            const prices = {
+                'smart-lighting': '₹2999',
+                'smart-switches': '₹1999',
+                'home-automation': '₹4999'
+            };
+
+            serviceType.addEventListener('change', function() {
+                const selectedService = this.value;
+                priceDisplay.textContent = `Starting from ${prices[selectedService]}`;
+            });
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                if (zipcodeInput.value.length !== 6) {
+                    alert('Please enter a valid 6-digit ZIP code.');
+                    return;
+                }
+
+                const formData = {
+                    zipcode: zipcodeInput.value,
+                    serviceType: serviceType.value,
+                    date: dateInput.value,
+                    time: document.getElementById('time').value,
+                    details: document.getElementById('service-details').value
+                };
+
+                console.log('Smart Home Electrical Upgrades Booking Submitted:', formData);
+                alert('Thank you for your booking! We will confirm your appointment shortly.');
+            });
+        });
+    </script>
+
+<%- include("partials/footer") %>
+</body>
+</html>

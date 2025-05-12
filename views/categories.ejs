@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/css/navstyle.css">
+<link rel="stylesheet" href="/css/footstyle.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories near you</title>
+    <link rel="stylesheet" href="/css/styles_foot.css">
+</head>
+<body>
+<%- include("partials/navbar") %>
+
+    <nav>
+        <div class="navbar">
+            <!-- Left Section (Logo + Name + Home) -->
+            <div class="nav-left">
+                <img src="/images/SkillLink_logo.png" alt="SkillLink Logo" class="logo"> 
+                <span class="brand-name">SkillLink</span>
+                <a href="/" class="nav-link">Home</a>
+            </div>
+    
+            <!-- Right Section (Dropdown + Conditional Content) -->
+            <div class="nav-right">
+                <!-- Dropdown for Services -->
+                <div class="dropdown">
+                    <button class="dropbtn">All Services ▼</button>
+                    <div class="dropdown-content">
+                        <a href="/services">Services</a>
+                        <a href="/supplies">Supplies</a>
+                    </div>
+                </div>
+    
+                <!-- Conditional Login/Signup or Hamburger Menu -->
+                <div id="auth-section">
+                    <!-- Default state: Login/Signup button -->
+                    <a href="//public/login" class="btn" id="login-signup-btn">Login/Signup</a>
+                    <!-- Logged-in state: Hamburger menu (hidden by default) -->
+                    <div class="hamburger-menu" id="hamburger-menu" style="display: none;">
+                        <div class="hamburger-icon">☰</div>
+                        <div class="menu-content">
+                            <a href="/customer_dashboard" class="dashboard-link">Dashboard</a>
+                            <span class="close-menu">X</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div 
+
+     
+    style="background-image: url('https://res.cloudinary.com/liaison-inc/image/upload/c_fill,f_auto,q_auto/services/homeguide/backgrounds/home-theater-system-repair-or-service.jpg')"; /* Replace with your banner image */
+   class="header-image">
+       <h1>Categories near you</h1>
+    </div>
+    <div class="container">
+        <h1>Find Services Near You</h1>
+        <p>Browse through a wide range of service categories available in your locality.</p>
+
+        <h2>Popular Categories</h2>
+        <ul>
+            <li>Home Cleaning</li>
+            <li>Electrical Repairs</li>
+            <li>Plumbing Services</li>
+            <li>Beauty & Wellness</li>
+            <li>Furniture Assembly</li>
+            <li>Carpentry</li>
+        </ul>
+
+        <p>Enter your location to discover available services near you.</p>
+    </div>
+   
+<%- include("partials/footer") %>
+</body>
+</html>

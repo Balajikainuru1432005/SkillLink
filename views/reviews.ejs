@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/css/navstyle.css">
+<link rel="stylesheet" href="/css/footstyle.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews - SkillLink</title>
+    <link rel="stylesheet" href="/css/styles_foot.css">
+</head>
+<body>
+<%- include("partials/navbar") %>
+
+    <nav>
+        <div class="navbar">
+            <!-- Left Section (Logo + Name + Home) -->
+            <div class="nav-left">
+                <img src="/images/SkillLink_logo.png" alt="SkillLink Logo" class="logo"> 
+                <span class="brand-name">SkillLink</span>
+                <a href="/" class="nav-link">Home</a>
+            </div>
+    
+            <!-- Right Section (Dropdown + Conditional Content) -->
+            <div class="nav-right">
+                <!-- Dropdown for Services -->
+                <div class="dropdown">
+                    <button class="dropbtn">All Services ▼</button>
+                    <div class="dropdown-content">
+                        <a href="/services">Services</a>
+                        <a href="/supplies">Supplies</a>
+                    </div>
+                </div>
+    
+                <!-- Conditional Login/Signup or Hamburger Menu -->
+                <div id="auth-section">
+                    <!-- Default state: Login/Signup button -->
+                    <a href="//public/login" class="btn" id="login-signup-btn">Login/Signup</a>
+                    <!-- Logged-in state: Hamburger menu (hidden by default) -->
+                    <div class="hamburger-menu" id="hamburger-menu" style="display: none;">
+                        <div class="hamburger-icon">☰</div>
+                        <div class="menu-content">
+                            <a href="/customer_dashboard" class="dashboard-link">Dashboard</a>
+                            <span class="close-menu">X</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <div style="background-image: url('https://tse4.mm.bing.net/th?id=OIP.j5yeTmsphRs3-e0wwy_AggHaEc&pid=Api&P=0&h=180')"; /* Replace with your banner image */
+    class="header-image">
+        <h1>Reviews - SkillLink</h1>
+        <p>Read reviews from workers, customers, sellers, and other users of SkillLink.</p>
+    </div>
+
+    <div class="container">
+        <!-- Workers Reviews -->
+        <section id="workers">
+            <h2>🔨 Reviews from Workers</h2>
+            <p>See what our service providers say about working with SkillLink.</p>
+            <div class="review">
+                <p>⭐️⭐️⭐️⭐️⭐️ "SkillLink helped me find more customers in my area. The platform is easy to use!"</p>
+                <h4>- Ramesh, Electrician</h4>
+            </div>
+            <div class="review">
+                <p>⭐️⭐️⭐️⭐️ "Good payment system and support. I can now manage my own schedule!"</p>
+                <h4>- Priya, Home Cleaner</h4>
+            </div>
+        </section>
+
+        <!-- Customers Reviews -->
+        <section id="customers">
+            <h2>🛒 Reviews from Customers</h2>
+            <p>Our customers love the convenience of SkillLink.</p>
+            <div class="review">
+                <p>⭐️⭐️⭐️⭐️⭐️ "I booked a plumber within minutes. Hassle-free experience!"</p>
+                <h4>- Anjali, Mumbai</h4>
+            </div>
+            <div class="review">
+                <p>⭐️⭐️⭐️⭐️ "The ratings system helps in choosing the right service provider. Very useful!"</p>
+                <h4>- Raj, Bangalore</h4>
+            </div>
+        </section>
+
+        <!-- Sellers Reviews -->
+        <section id="sellers">
+            <h2>🛍️ Reviews from Sellers</h2>
+            <p>SkillLink is helping local sellers grow their business.</p>
+            <div class="review">
+                <p>⭐️⭐️⭐️⭐️⭐️ "I sell handmade jewelry, and now I have more online customers!"</p>
+                <h4>- Meena, Jaipur</h4>
+            </div>
+            <div class="review">
+                <p>⭐️⭐️⭐️⭐️ "Great platform for small businesses. Easy to set up and manage orders."</p>
+                <h4>- Aman, Delhi</h4>
+            </div>
+        </section>
+
+        <!-- Other Reviews -->
+        <section id="others">
+            <h2>🌟 Other Reviews</h2>
+            <p>Feedback from investors, developers, and SkillLink partners.</p>
+            <div class="review">
+                <p>⭐️⭐️⭐️⭐️⭐️ "A promising platform for gig workers. Excellent concept!"</p>
+                <h4>- Startup Investor</h4>
+            </div>
+            <div class="review">
+                <p>⭐️⭐️⭐️⭐️ "As a developer, I love the interface. Very user-friendly!"</p>
+                <h4>- Web Developer</h4>
+            </div>
+        </section>
+    </div>
+
+    
+<%- include("partials/footer") %>
+</body>
+</html>
+

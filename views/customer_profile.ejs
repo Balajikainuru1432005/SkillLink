@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Profile | SkillLink</title>
+    <link rel="stylesheet" href="/css/navstyle.css">
+    <link rel="stylesheet" href="/css/customer_profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <%- include("partials/navbar") %>
+    <div class="sidebar">
+        <h2>SkillLink</h2>
+        <ul>
+            <li class="menu-item" data-section="dashboard">Dashboard</li>
+            <li class="menu-item active" data-section="profile">Profile</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h2>Customer Profile</h2>
+            <div class="profile">
+                <img id="profile-pic" src="<%= userProfile.profilePhoto || '/images/default-profile.png' %>" alt="Customer" class="profile-pic">
+                <span class="customer-name" id="customer-name"><%= customerName %></span>
+            </div>
+        </header>
+
+        <div id="content-area">
+            <div id="profile" class="content-section active">
+                <div class="profile-container">
+                    <div class="profile-overview">
+                        <div class="profile-header">
+                            <div class="profile-photo-container">
+                                <img src="<%= userProfile.profilePhoto || '/images/default-profile.png' %>" 
+                                     alt="Profile Photo" 
+                                     class="profile-photo">
+                                <div class="photo-upload-overlay">
+                                    <form id="photo-upload-form" enctype="multipart/form-data">
+                                        <input type="file" id="profile-photo-input" name="profilePhoto" accept="image/*" style="display: none;">
+                                        <button type="button" id="change-photo-btn" class="photo-upload-btn">
+                                            <i class="fas fa-camera"></i> Update
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="profile-name">
+                                <h2><%= userProfile.firstName %> <%= userProfile.lastName %></h2>
+                                <p class="member-status">SkillLink Member</p>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-details">
+                            <div class="detail-item">
+                                <i class="fas fa-envelope detail-icon"></i>
+                                <div class="detail-content">
+                                    <span class="detail-label">Email</span>
+                                    <span class="detail-value"><%= userProfile.email %></span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-phone detail-icon"></i>
+                                <div class="detail-content">
+                                    <span class="detail-label">Phone</span>
+                                    <span class="detail-value"><%= userProfile.phone %></span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt detail-icon"></i>
+                                <div class="detail-content">
+                                    <span class="detail-label">Address</span>
+                                    <span class="detail-value"><%= userProfile.flat && userProfile.pincode ? `${userProfile.flat}, ${userProfile.area || ''}, ${userProfile.town || ''}, ${userProfile.state || ''} - ${userProfile.pincode}` : 'Not set' %></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="edit-profile-btn" id="edit-profile-btn">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </button>
+                    </div>
+
+                    <!-- Address Modal -->
+                    <div class="profile-modal" id="address-modal" style="display: none;">
+                        <div class="modal-content">
+                            <h3>Update Your Address</h3>
+                            <form id="address-form">
+                                <div class="address-grid">
+                                    <div class="form-group">
+                                        <label>Flat/House No.</label>
+                                        <input type="text" name="flat" id="flat" value="<%= userProfile.flat || '' %>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Area/Street</label>
+                                        <input type="text" name="area" id="area" value="<%= userProfile.area || '' %>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Landmark (Optional)</label>
+                                        <input type="text" name="landmark" id="landmark" value="<%= userProfile.landmark || '' %>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Pincode</label>
+                                        <input type="text" name="pincode" id="pincode" value="<%= userProfile.pincode || '' %>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Town/City</label>
+                                        <input type="text" name="town" id="town" value="<%= userProfile.town || '' %>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>District</label>
+                                        <input type="text" name="district" id="district" value="<%= userProfile.district || '' %>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>State</label>
+                                        <select name="state" id="state">
+                                            <option value="">Select State</option>
+                                            <option value="Andhra Pradesh" <%= userProfile.state === 'Andhra Pradesh' ? 'selected' : '' %>>Andhra Pradesh</option>
+                                            <option value="Telangana" <%= userProfile.state === 'Telangana' ? 'selected' : '' %>>Telangana</option>
+                                            <option value="Karnataka" <%= userProfile.state === 'Karnataka' ? 'selected' : '' %>>Karnataka</option>
+                                            <!-- Add more states as needed -->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-actions">
+                                    <button type="submit" id="save-address-btn">Save Address</button>
+                                    <button type="button" id="cancel-address-btn">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dashboard" class="content-section">
+                <p>Redirecting to Dashboard...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("Profile page script loaded");
+
+            // Sidebar Navigation
+            const menuItems = document.querySelectorAll(".menu-item");
+            if (menuItems.length > 0) {
+                menuItems.forEach(menu => {
+                    menu.addEventListener("click", function () {
+                        console.log("Menu clicked:", menu.getAttribute("data-section"));
+                        menuItems.forEach(item => item.classList.remove("active"));
+                        menu.classList.add("active");
+                        document.querySelectorAll(".content-section").forEach(section => section.classList.remove("active"));
+                        const sectionId = menu.getAttribute("data-section");
+                        document.getElementById(sectionId).classList.add("active");
+                        if (sectionId === "dashboard") {
+                            window.location.href = "/customer_dashboard";
+                        }
+                    });
+                });
+            } else {
+                console.error("No menu items found");
+            }
+
+            // Photo Upload Functionality
+            const changePhotoBtn = document.getElementById('change-photo-btn');
+            const photoInput = document.getElementById('profile-photo-input');
+            const photoForm = document.getElementById('photo-upload-form');
+            if (changePhotoBtn && photoInput && photoForm) {
+                console.log("Photo upload elements found");
+                changePhotoBtn.addEventListener('click', function () {
+                    console.log("Change photo button clicked");
+                    photoInput.click();
+                });
+                photoInput.addEventListener('change', async function () {
+                    console.log("Photo input changed, files:", photoInput.files);
+                    if (photoInput.files.length === 0) {
+                        console.error("No file selected");
+                        alert("Please select a photo to upload.");
+                        return;
+                    }
+                    const formData = new FormData(photoForm);
+                    try {
+                        console.log("Sending photo update request...");
+                        const response = await fetch('/update-customer-profile', {
+                            method: 'POST',
+                            body: formData
+                        });
+                        const data = await response.json();
+                        console.log("Photo update response:", data);
+                        if (data.success) {
+                            document.querySelector('.profile-photo').src = data.profilePhoto;
+                            document.getElementById('profile-pic').src = data.profilePhoto;
+                            alert('Profile photo updated successfully!');
+                        } else {
+                            console.error("Photo update failed:", data.error);
+                            alert('Error: ' + data.error);
+                        }
+                    } catch (error) {
+                        console.error('Photo upload network error:', error);
+                        alert('Network error: Unable to update photo.');
+                    }
+                });
+            } else {
+                console.error("Photo upload elements missing:", { changePhotoBtn, photoInput, photoForm });
+            }
+
+            // Address Modal and Edit Functionality
+            const editProfileBtn = document.getElementById('edit-profile-btn');
+            const addressModal = document.getElementById('address-modal');
+            const cancelAddressBtn = document.getElementById('cancel-address-btn');
+            const addressForm = document.getElementById('address-form');
+            if (editProfileBtn && addressModal && cancelAddressBtn && addressForm) {
+                console.log("Address modal elements found");
+                editProfileBtn.addEventListener('click', function () {
+                    console.log("Edit profile button clicked");
+                    addressModal.style.display = 'flex';
+                });
+                cancelAddressBtn.addEventListener('click', function () {
+                    console.log("Cancel button clicked");
+                    addressModal.style.display = 'none';
+                });
+                addressModal.addEventListener('click', function (e) {
+                    if (e.target === addressModal) {
+                        console.log("Clicked outside modal, closing");
+                        addressModal.style.display = 'none';
+                    }
+                });
+                addressForm.addEventListener('submit', async function (e) {
+                    e.preventDefault();
+                    console.log("Address form submitted");
+                    const formData = new FormData(addressForm);
+                    const userProfile = <%- JSON.stringify(userProfile) %>;
+                    formData.append('firstName', userProfile.firstName);
+                    formData.append('lastName', userProfile.lastName);
+                    formData.append('email', userProfile.email);
+                    formData.append('phone', userProfile.phone);
+                    console.log("Form data to send:", Array.from(formData.entries()));
+                    try {
+                        console.log("Sending address update request...");
+                        const response = await fetch('/update-customer-profile', {
+                            method: 'POST',
+                            body: formData
+                        });
+                        const data = await response.json();
+                        console.log("Address update response:", data);
+                        if (data.success) {
+                            alert('Address updated successfully!');
+                            location.reload();
+                        } else {
+                            console.error("Address update failed:", data.error);
+                            alert('Error: ' + data.error);
+                        }
+                    } catch (error) {
+                        console.error('Address update network error:', error);
+                        alert('Network error: Unable to update address.');
+                    }
+                });
+            } else {
+                console.error("Address modal elements missing:", { editProfileBtn, addressModal, cancelAddressBtn, addressForm });
+            }
+        });
+    </script>
+</body>
+</html>

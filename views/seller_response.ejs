@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Responses</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        /* Navbar Styling */
+        .navbar {
+            background-color: #007bff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar .brand {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .navbar .user-info {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid #fff;
+        }
+        .navbar .user-info span {
+            color: #fff;
+            font-size: 16px;
+            margin-right: 20px;
+        }
+        .navbar .user-info a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 5px;
+            background-color: #0056b3;
+            transition: background-color 0.3s;
+        }
+        .navbar .user-info a:hover {
+            background-color: #003d82;
+        }
+        /* Container Styling */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+        /* Request Details Styling */
+        .request-details {
+            background: #fff;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .request-details h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .request-details p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .request-details ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        .request-details ul li {
+            font-size: 16px;
+            color: #555;
+        }
+        /* Sellers List Styling */
+        .sellers-list {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .sellers-list h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .seller-card {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fafafa;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .seller-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        .seller-card img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-right: 25px;
+            border: 3px solid #007bff;
+        }
+        .seller-info {
+            flex-grow: 1;
+        }
+        .seller-info h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 20px;
+        }
+        .seller-info p {
+            margin: 8px 0;
+            color: #666;
+            font-size: 16px;
+        }
+        .btn {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .no-sellers {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            font-size: 18px;
+            padding: 20px;
+        }
+        /* Footer Styling */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="brand">SkillLink</div>
+        <div class="user-info">
+            <img src="<%= profilePhoto %>" alt="Profile">
+            <span>Welcome, <%= customerName %></span>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Seller Responses</h1>
+
+        <!-- Supply Request Details -->
+        <div class="request-details">
+            <h2>Your Supply Request</h2>
+            <p><strong>Category:</strong> <%= request.category || 'Not specified' %></p>
+            <p><strong>Supplies:</strong></p>
+            <ul>
+                <% if (request.supplies && request.supplies.length > 0) { %>
+                    <% request.supplies.forEach(item => { %>
+                        <li><%= item.name || 'Unnamed item' %> - <%= item.units || 0 %> units</li>
+                    <% }) %>
+                <% } else { %>
+                    <li>No supplies listed</li>
+                <% } %>
+            </ul>
+            <p><strong>Additional Info:</strong> <%= request.additional || 'None' %></p>
+            <p><strong>Status:</strong> <%= request.status || 'Pending' %></p>
+        </div>
+
+        <!-- Seller Responses -->
+        <div class="sellers-list">
+            <h2>Available Sellers</h2>
+            <% if (sellers && sellers.length > 0) { %>
+                <% sellers.forEach(seller => { %>
+                    <div class="seller-card">
+                        <img src="<%= seller.image || '/images/default-profile.png' %>" alt="<%= seller.name %>">
+                        <div class="seller-info">
+                            <h3><%= seller.name %> - <%= seller.shopName %></h3>
+                            <p><strong>Location:</strong> <%= seller.location || 'Not provided' %></p>
+                            <p><strong>Contact:</strong> <%= seller.contact || 'Not provided' %></p>
+                            <p><strong>Rating:</strong> <%= seller.rating || 'Not rated' %></p>
+                            <p><strong>Total Price:</strong> ₹<%= seller.totalPrice.toFixed(2) %></p>
+                            <a href="/seller_detail/<%= seller.id %>" class="btn">View Details</a>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p class="no-sellers">No sellers available for this category yet.</p>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 SupplySync. All rights reserved.</p>
+    </footer>
+</body>
+</html>

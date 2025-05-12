@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/css/navstyle.css">
+<link rel="stylesheet" href="/css/footstyle.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions - SkillLink</title>
+    <link rel="stylesheet" href="/css/styles_foot.css">
+</head>
+<body>
+<%- include("partials/navbar") %>
+
+    <nav>
+        <div class="navbar">
+            <!-- Left Section (Logo + Name + Home) -->
+            <div class="nav-left">
+                <img src="/images/SkillLink_logo.png" alt="SkillLink Logo" class="logo"> 
+                <span class="brand-name">SkillLink</span>
+                <a href="/" class="nav-link">Home</a>
+            </div>
+    
+            <!-- Right Section (Dropdown + Conditional Content) -->
+            <div class="nav-right">
+                <!-- Dropdown for Services -->
+                <div class="dropdown">
+                    <button class="dropbtn">All Services ▼</button>
+                    <div class="dropdown-content">
+                        <a href="/services">Services</a>
+                        <a href="/supplies">Supplies</a>
+                    </div>
+                </div>
+    
+                <!-- Conditional Login/Signup or Hamburger Menu -->
+                <div id="auth-section">
+                    <!-- Default state: Login/Signup button -->
+                    <a href="//public/login" class="btn" id="login-signup-btn">Login/Signup</a>
+                    <!-- Logged-in state: Hamburger menu (hidden by default) -->
+                    <div class="hamburger-menu" id="hamburger-menu" style="display: none;">
+                        <div class="hamburger-icon">☰</div>
+                        <div class="menu-content">
+                            <a href="/customer_dashboard" class="dashboard-link">Dashboard</a>
+                            <span class="close-menu">X</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section with Background Image -->
+    <div  
+    
+    style="background-image: url('https://res.cloudinary.com/liaison-inc/image/upload/c_fill,f_auto,q_auto/services/homeguide/backgrounds/home-theater-system-repair-or-service.jpg')"; /* Replace with your banner image */
+   class="header-image">
+       <h1>Terms & Conditions - SkillLink</h1>
+    </div>
+    <div >
+        <h1>Terms & Conditions</h1>
+        <p>Last Updated: March 2025</p>
+    </div>
+
+    <div class="container">
+        <section>
+            <h2>1. Introduction</h2>
+            <p>Welcome to SkillLink! These Terms & Conditions govern your use of our platform, services, and policies. By accessing or using SkillLink, you agree to these terms.</p>
+        </section>
+
+        <section>
+            <h2>2. Definitions</h2>
+            <p><strong>“SkillLink”</strong> refers to the platform connecting customers with local service providers and sellers.</p>
+            <p><strong>“User”</strong> means anyone using SkillLink, including customers, workers, and sellers.</p>
+            <p><strong>“Service Provider”</strong> refers to workers offering services through SkillLink.</p>
+            <p><strong>“Seller”</strong> refers to vendors selling products or materials on SkillLink.</p>
+        </section>
+
+        <section>
+            <h2>3. User Accounts</h2>
+            <p>To access certain features, you must create an account. You agree to provide accurate information and maintain the confidentiality of your credentials.</p>
+        </section>
+
+        <section>
+            <h2>4. Services & Transactions</h2>
+            <p>SkillLink connects customers with service providers and sellers. We do not directly offer services but facilitate transactions between parties.</p>
+            <ul>
+                <li>Customers can book services from verified workers.</li>
+                <li>Sellers can list their products for sale.</li>
+                <li>Service providers are responsible for completing tasks as agreed.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>5. Payments & Refunds</h2>
+            <p>All payments are processed securely through our payment gateway.</p>
+            <ul>
+                <li>Customers must pay in advance for bookings.</li>
+                <li>Workers and sellers receive payments after order completion.</li>
+                <li>Refunds are processed in case of cancellations based on our <a href="/refund-policy">Refund Policy</a>.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>6. Cancellation & Rescheduling</h2>
+            <p>Customers can cancel or reschedule services under the following conditions:</p>
+            <ul>
+                <li>Cancellations within 24 hours may incur a fee.</li>
+                <li>Service providers can decline bookings if unavailable.</li>
+                <li>Sellers can cancel orders if stock is unavailable.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>7. User Responsibilities</h2>
+            <p>All users must comply with the following:</p>
+            <ul>
+                <li>No fraudulent activity or misrepresentation.</li>
+                <li>No harassment, discrimination, or offensive behavior.</li>
+                <li>Respect for intellectual property rights.</li>
+                <li>Compliance with local laws and regulations.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>8. Dispute Resolution</h2>
+            <p>Any disputes will be handled through SkillLink’s support team. If unresolved, arbitration or legal action may be pursued.</p>
+        </section>
+
+        <section>
+            <h2>9. Limitation of Liability</h2>
+            <p>SkillLink is not liable for:</p>
+            <ul>
+                <li>Damages arising from service provider/customer disputes.</li>
+                <li>Injuries, losses, or property damage related to services booked.</li>
+                <li>Technical failures or unauthorized access to user data.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>10. Privacy Policy</h2>
+            <p>We collect and use data in accordance with our <a href="/privacy">Privacy Policy</a>.</p>
+        </section>
+
+        <section>
+            <h2>11. Changes to Terms</h2>
+            <p>We may update these Terms & Conditions periodically. Continued use of SkillLink after changes means you accept the updated terms.</p>
+        </section>
+
+        <section>
+            <h2>12. Contact Us</h2>
+            <p>For any questions regarding these Terms & Conditions, contact us at <a href="mailto:support@skilllink.com">support@skilllink.com</a>.</p>
+        </section>
+    </div>
+
+   
+
+<%- include("partials/footer") %>
+</body>
+</html>
+

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Verification</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #dfe7fd, #a8c0ff);
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .sidebar {
+            width: 250px;
+            background: #f4f4f4;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .progress-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            background: #6c88f7;
+            transition: width 0.3s ease;
+        }
+        .steps {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+        }
+        .step {
+            padding: 10px;
+            font-size: 14px;
+            color: #888;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .step.active {
+            color: #6c88f7;
+            font-weight: bold;
+        }
+        .form-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        .form-step {
+            display: none;
+        }
+        .form-step.active {
+            display: block;
+        }
+        h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .required {
+            color: red;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .name-container {
+            display: flex;
+            gap: 20px;
+        }
+        .name-field {
+            flex: 1;
+        }
+        .profile-pic-container {
+            text-align: center;
+        }
+        .profile-pic-preview {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile-pic-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .file-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .delete-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .custom-checkbox {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        .checkmark {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-right: 10px;
+            display: inline-block;
+            position: relative;
+        }
+        input[type="checkbox"]:checked + .checkmark::after {
+            content: '✔';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #6c88f7;
+        }
+        .default-checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+        .error-message.show {
+            display: block;
+        }
+        input.error {
+            border-color: red;
+        }
+        button {
+            padding: 10px 20px;
+            background: #6c88f7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #576fc9;
+        }
+        #add-file-btn {
+            background: #4caf50;
+        }
+        #add-file-btn:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="progress-header">Progress Bar</div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <ul class="steps">
+                <li class="step active" data-step="1">Personal Details</li>
+                <li class="step" data-step="2">Professional Details</li>
+                <li class="step" data-step="3">Document Verification</li>
+            </ul>
+        </div>
+
+        <div class="form-content">
+            <form id="seller-signup-form" enctype="multipart/form-data">
+                <!-- Step 1: Personal Details -->
+                <div class="form-step active" data-step="1">
+                    <h2>Personal Details</h2>
+                    <p>Provide your personal details below.</p>
+
+                    <div class="name-container">
+                        <div class="name-field">
+                            <label for="firstName">First Name <span class="required">*</span></label>
+                            <input type="text" id="firstName" name="firstName" placeholder="Enter First Name" required>
+                            <span class="error-message" id="firstName-error"></span>
+                        </div>
+                        <div class="name-field">
+                            <label for="lastName">Last Name <span class="required">*</span></label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Enter Last Name" required>
+                            <span class="error-message" id="lastName-error"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-pic">Profile Picture <span class="required">*</span></label>
+                        <div class="profile-pic-container">
+                            <input type="file" id="profile-pic" name="profilePhoto" class="file-input" accept="image/*" required style="display: none;">
+                            <label for="profile-pic" class="profile-pic-preview">
+                                <div class="selfie-preview" id="profilePicPreview">
+                                    <i class="bx bx-user"></i>
+                                </div>
+                            </label>
+                        </div>
+                        <span class="error-message" id="profile-pic-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" placeholder="+91 9934930223" required>
+                        <span class="error-message" id="phone-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="Enter Email" required>
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password <span class="required">*</span></label>
+                        <input type="password" id="password" name="password" placeholder="Enter Password" required>
+                        <span class="error-message" id="password-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="retype-password">Retype Password <span class="required">*</span></label>
+                        <input type="password" id="retype-password" name="retype-password" placeholder="Retype Password" required>
+                        <span class="error-message" id="retype-password-error"></span>
+                    </div>
+
+                    <fieldset>
+                        <legend>Address Details</legend>
+                        <div class="form-group">
+                            <label for="flat">Flat, House no., Building <span class="required">*</span></label>
+                            <input type="text" id="flat" name="flat" placeholder="Enter Flat/House No." required>
+                            <span class="error-message" id="flat-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="area">Area, Street, Sector <span class="required">*</span></label>
+                            <input type="text" id="area" name="area" placeholder="Enter Area/Street" required>
+                            <span class="error-message" id="area-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="landmark">Landmark <span class="required">*</span></label>
+                            <input type="text" id="landmark" name="landmark" placeholder="Enter Landmark" required>
+                            <span class="error-message" id="landmark-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pincode">6-digit Pincode <span class="required">*</span></label>
+                            <input type="text" id="pincode" name="pincode" placeholder="Enter Pincode" required pattern="\d{6}" maxlength="6">
+                            <span class="error-message" id="pincode-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="town">Town/City <span class="required">*</span></label>
+                            <input type="text" id="town" name="town" placeholder="Enter Town/City" required>
+                            <span class="error-message" id="town-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="state">Select State <span class="required">*</span></label>
+                            <select id="state" name="state" required>
+                                <option value="">Select State</option>
+                                <% Object.keys(stateDistrictMap).forEach(state => { %>
+                                    <option value="<%= state %>"><%= state %></option>
+                                <% }); %>
+                            </select>
+                            <span class="error-message" id="state-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="district">Select District <span class="required">*</span></label>
+                            <select id="district" name="district" required disabled>
+                                <option value="">Select District</option>
+                            </select>
+                            <span class="error-message" id="district-error"></span>
+                        </div>
+
+                        <div class="default-checkbox-container">
+                            <input type="checkbox" id="defaultAddress" name="defaultAddress">
+                            <label for="defaultAddress">Make this my default address</label>
+                        </div>
+                    </fieldset>
+                    <button type="button" class="next-btn">Next</button>
+                </div>
+
+                <!-- Step 2: Professional Details -->
+                <div class="form-step" data-step="2">
+                    <h2>Professional Details</h2>
+                    <p>Tell us about your business.</p>
+
+                    <div class="form-group">
+                        <label for="shop-name">Shop Name <span class="required">*</span></label>
+                        <input type="text" id="shop-name" name="shopName" placeholder="Enter Shop Name" required>
+                        <span class="error-message" id="shop-name-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="professional-phone">Phone Number</label>
+                        <input type="tel" id="professional-phone" name="professionalPhone" placeholder="Enter Phone Number (Professional)">
+                        <span class="error-message" id="professional-phone-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="professional-email">Email</label>
+                        <input type="email" id="professional-email" name="professionalEmail" placeholder="Email (Professional)">
+                        <span class="error-message" id="professional-email-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="shop-pictures">Shop Pictures <span class="required">*</span></label>
+                        <div id="shop-pictures-container">
+                            <div class="file-input-wrapper">
+                                <input type="file" class="shop-picture" name="shopImages" accept=".jpg,.jpeg,.png" required>
+                                <button type="button" class="delete-btn" onclick="removeFileInput(this)">🗑</button>
+                            </div>
+                            <div class="file-input-wrapper">
+                                <input type="file" class="shop-picture" name="shopImages" accept=".jpg,.jpeg,.png" required>
+                                <button type="button" class="delete-btn" onclick="removeFileInput(this)">🗑</button>
+                            </div>
+                        </div>
+                        <span class="error-message" id="shop-pictures-error"></span>
+                        <button type="button" id="add-file-btn" onclick="addFileInput()">➕ Add Another Picture</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" placeholder="Description about your shop..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Shop Type <span class="required">*</span></label>
+                        <input type="hidden" id="shopTypes" name="shopTypes">
+                        <div class="checkbox-grid">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="shop-type" value="Electrical Parts">
+                                <span class="checkmark"></span>
+                                Electrical Parts
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="shop-type" value="Plumbing Parts">
+                                <span class="checkmark"></span>
+                                Plumbing Parts
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="shop-type" value="Mechanical Parts">
+                                <span class="checkmark"></span>
+                                Mechanical Parts
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="shop-type" value="Carpentry Parts">
+                                <span class="checkmark"></span>
+                                Carpentry Parts
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="shop-type" value="Painting Parts">
+                                <span class="checkmark"></span>
+                                Painting Parts
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="shop-type" value="Driving Essentials">
+                                <span class="checkmark"></span>
+                                Driving Essentials
+                            </label>
+                        </div>
+                        <span class="error-message" id="shop-type-error"></span>
+                    </div>
+
+                    <fieldset>
+                        <legend>Professional Address Details</legend>
+                        <div class="form-group">
+                            <label for="flat-professional">Flat, House no., Building <span class="required">*</span></label>
+                            <input type="text" id="flat-professional" name="flatProfessional" placeholder="Enter Flat/House No." required>
+                            <span class="error-message" id="flat-professional-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="area-professional">Area, Street, Sector <span class="required">*</span></label>
+                            <input type="text" id="area-professional" name="areaProfessional" placeholder="Enter Area/Street" required>
+                            <span class="error-message" id="area-professional-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="landmark-professional">Landmark <span class="required">*</span></label>
+                            <input type="text" id="landmark-professional" name="landmarkProfessional" placeholder="Enter Landmark" required>
+                            <span class="error-message" id="landmark-professional-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pincode-professional">6-digit Pincode <span class="required">*</span></label>
+                            <input type="text" id="pincode-professional" name="pincodeProfessional" placeholder="Enter Pincode" required pattern="\d{6}" maxlength="6">
+                            <span class="error-message" id="pincode-professional-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="town-professional">Town/City <span class="required">*</span></label>
+                            <input type="text" id="town-professional" name="townProfessional" placeholder="Enter Town/City" required>
+                            <span class="error-message" id="town-professional-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="state-professional">Select State <span class="required">*</span></label>
+                            <select id="state-professional" name="stateProfessional" required>
+                                <option value="">Select State</option>
+                                <% Object.keys(stateDistrictMap).forEach(state => { %>
+                                    <option value="<%= state %>"><%= state %></option>
+                                <% }); %>
+                            </select>
+                            <span class="error-message" id="state-professional-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="district-professional">Select District <span class="required">*</span></label>
+                            <select id="district-professional" name="districtProfessional" required disabled>
+                                <option value="">Select District</option>
+                            </select>
+                            <span class="error-message" id="district-professional-error"></span>
+                        </div>
+
+                        <div class="default-checkbox-container">
+                            <input type="checkbox" id="defaultAddress-professional" name="defaultAddressProfessional">
+                            <label for="defaultAddress-professional">Make this my default address</label>
+                        </div>
+                    </fieldset>
+
+                    <button type="button" class="prev-btn">Previous</button>
+                    <button type="button" class="next-btn">Next</button>
+                </div>
+
+                <!-- Step 3: Document Verification -->
+                <div class="form-step" data-step="3">
+                    <h2>Document Verification</h2>
+                    <p>Upload the required documents for verification.</p>
+
+                    <div class="form-group">
+                        <label for="govt-id">Government ID <span class="required">*</span></label>
+                        <input type="file" id="govt-id" name="govtId" accept=".pdf,.jpg,.jpeg,.png" required>
+                        <span class="error-message" id="govt-id-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="shop-registration">Shop Registration <span class="required">*</span></label>
+                        <input type="file" id="shop-registration" name="shopRegistration" accept=".pdf,.jpg,.jpeg,.png" required>
+                        <span class="error-message" id="shop-registration-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gst-registration">GST Registration <span class="required">*</span></label>
+                        <input type="file" id="gst-registration" name="gstRegistration" accept=".pdf,.jpg,.jpeg,.png" required>
+                        <span class="error-message" id="gst-registration-error"></span>
+                    </div>
+
+                    <button type="button" class="prev-btn">Previous</button>
+                    <button type="button" id="submit-btn">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const stateDistrictMap = <%- JSON.stringify(stateDistrictMap) %>;
+    </script>
+    <script src="/js/Sellers.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplies - SkillLink</title>
+    <link rel="stylesheet" href="/css/suppliesform1.css">
+    <link rel="stylesheet" href="/css/navstyle.css">
+    <link rel="stylesheet" href="/css/footstyle.css">
+</head>
+<body>
+    <%- include("partials/navbar") %>
+
+    <section class="supply-form-page">
+        <!-- Left Section with Background Image -->
+        <div class="supply-form-left">
+            <div class="supply-text">
+                <h2>Find the Best Parts & Materials</h2>
+                <p>Get high-quality materials from local sellers at the best prices. Simply fill out the form, and we’ll connect you with trusted suppliers.</p>
+            </div>
+        </div>
+    
+        <!-- Right Section (Form) -->
+        <div class="supply-form-right">
+            <h2>Enter Your Details</h2>
+            <form>
+                <div class="supply-input-group">
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" name="firstName" value="<%= userProfile.firstName %>" placeholder="Enter your first name">
+                </div>
+    
+                <div class="supply-input-group">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" name="lastName" value="<%= userProfile.lastName %>" placeholder="Enter your last name">
+                </div>
+    
+                <div class="supply-input-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone" value="<%= userProfile.phone %>" placeholder="Enter your phone number">
+                </div>
+    
+                <div class="supply-input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" value="<%= userProfile.email %>" placeholder="Enter your email">
+                </div>
+    
+                <div class="supply-input-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address" rows="3" placeholder="Enter your address"><%= userProfile.flat && userProfile.pincode ? `${userProfile.flat}, ${userProfile.area || ''}, ${userProfile.town || ''}, ${userProfile.state || ''} - ${userProfile.pincode}` : '' %></textarea>
+                </div>
+    
+                <button type="submit" class="supply-next-btn" id="next-btn">Next</button>
+            </form>
+        </div>
+    </section>
+    
+    <%- include("partials/footer") %>
+
+    <script src="/js/supply-form1.js"></script>
+</body>
+</html>

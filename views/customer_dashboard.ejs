@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard | SkillLink</title>
+    <link rel="stylesheet" href="/css/customer_dashboard.css">
+    <link rel="stylesheet" href="/css/navstyle.css">
+    <script src="/js/customer_dashboard.js" defer></script>
+</head>
+<body>
+    <%- include("partials/navbar") %>
+    <div class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="menu-item active" data-section="in-progress"><i class="fas fa-tools"></i> Works in Progress</li>
+            <li class="menu-item" data-section="completed"><i class="fas fa-history"></i> History</li>
+            <li class="menu-item" data-section="purchases"><i class="fas fa-shopping-bag"></i> Purchases</li>
+            <li class="menu-item" data-section="profile"><i class="fas fa-user"></i> Profile</li>
+            <li class="menu-item" data-section="settings"><i class="fas fa-cog"></i> Settings</li>
+            <li class="menu-item" data-section="supplies" style="cursor: pointer; padding: 10px; background-color: #fff; border-radius: 4px; margin: 5px 0;">
+                <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i> Request Supplies
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h1 class="main-title">Customer Dashboard</h1>
+        <div class="content-area">
+<div id="in-progress" class="content-section active">
+    <h3 class="section-title">Works in Progress</h3>
+    <div class="work-list">
+        <% if (inProgress.length === 0) { %>
+            <p>No works in progress.</p>
+        <% } else { %>
+            <% inProgress.forEach(work => { %>
+                <div class="work-item" data-service-id="<%= work._id %>">
+                    <p><strong>Job:</strong> <%= work.service_type %></p>
+                    <p><strong>Worker:</strong> <%= work.assigned_worker_id ? `${work.assigned_worker_id.firstName} ${work.assigned_worker_id.lastName}` : 'Not assigned' %></p>
+                    <p><strong>Location:</strong> <%= work.address %></p>
+                    <p><strong>Time:</strong> <%= work.date %> <%= work.time %></p>
+                    <p><strong>Price:</strong> <%= work.price ? `₹${work.price.toFixed(2)}` : 'Not set' %></p>
+                    <p><strong>Status:</strong> In Progress</p>
+                    <button class="complete-btn">Work Completed</button>
+                </div>
+                <hr class="divider">
+            <% }) %>
+        <% } %>
+    </div>
+</div>
+            </div>
+
+            <div id="completed" class="content-section">
+                <h3 class="section-title">Work History</h3>
+                <div class="work-list">
+                    <% if (completed.length === 0) { %>
+                        <p>No completed works.</p>
+                    <% } else { %>
+                        <% completed.forEach(work => { %>
+                            <div class="work-item" data-service-id="<%= work.id %>">
+                                <p><strong>Job:</strong> <%= work.service_type %></p>
+                                <p><strong>Worker:</strong> Fetching...</p>
+                                <p><strong>Location:</strong> <%= work.address %></p>
+                                <p><strong>Completed:</strong> <%= work.date %></p>
+                                <p><strong>Price:</strong> Fetching...</p>
+                                <p><strong>Status:</strong> Completed</p>
+                                <button class="feedback-btn">Leave Feedback</button>
+                            </div>
+                            <hr class="divider">
+                        <% }) %>
+                    <% } %>
+                </div>
+            </div>
+
+            <div id="purchases" class="content-section">
+                <h3 class="section-title">Purchases</h3>
+                <div class="purchase-list">
+                    <% if (purchases.length === 0) { %>
+                        <p>No purchases yet.</p>
+                    <% } else { %>
+                        <% purchases.forEach(purchase => { %>
+                            <div class="purchase-item" data-purchase-id="<%= purchase.id %>">
+                                <p><strong>Seller:</strong> <%= purchase.shopName %></p>
+                                <p><strong>Items:</strong> <%= purchase.items.map(item => `${item.name} (${item.units})`).join(', ') %></p>
+                                <p><strong>Total Price:</strong> ₹<%= purchase.total_price.toFixed(2) %></p>
+                                <p><strong>Status:</strong> <%= purchase.status %></p>
+                                <% if (purchase.status === 'Pending') { %>
+                                    <form action="/update-purchase-status" method="POST" class="purchase-form">
+                                        <input type="hidden" name="purchaseId" value="<%= purchase.id %>">
+                                        <select name="status" onchange="toggleRatingFeedback(this)">
+                                            <option value="" disabled selected>Select Status</option>
+                                            <option value="Purchased">Purchased</option>
+                                            <option value="Not Purchased">Not Purchased</option>
+                                        </select>
+                                        <input type="number" name="rating" min="1" max="5" placeholder="Rating (1-5)" style="display: none;" required>
+                                        <textarea name="feedback" placeholder="Feedback" style="display: none;"></textarea>
+                                        <button type="submit">Update</button>
+                                    </form>
+                                <% } else if (purchase.status === 'Purchased') { %>
+                                    <p><strong>Rating:</strong> <%= purchase.rating %>/5</p>
+                                    <p><strong>Feedback:</strong> <%= purchase.feedback || 'None' %></p>
+                                <% } %>
+                            </div>
+                            <hr class="divider">
+                        <% }) %>
+                    <% } %>
+                </div>
+            </div>
+
+            <div id="profile" class="content-section">
+                <h3 class="section-title">Your Profile</h3>
+                <p>Redirecting to <a href="/customer_profile">Profile Page</a>...</p>
+            </div>
+
+            <div id="settings" class="content-section">
+                <h3 class="section-title">Settings</h3>
+                <a href="/customer_profile" class="settings-btn">Update Your Profile</a>
+                <button class="settings-btn">Change Password</button>
+                <button id="logout-btn" class="settings-btn">Logout</button>
+            </div>
+
+            <div id="supplies" class="content-section" style="display: none;">
+                <h3 class="section-title" style="color: #333; margin-bottom: 20px;">Request Supplies</h3>
+                <p style="color: #555; margin-bottom: 20px;">Need parts for your project? Request them here!</p>
+                <a href="/suppliesform2" style="display: inline-block; background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">Go to Supplies Form</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script>
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                document.querySelectorAll('.content-section').forEach(section => section.style.display = 'none');
+                const sectionId = item.getAttribute('data-section');
+                document.getElementById(sectionId).style.display = 'block';
+            });
+        });
+
+        function toggleRatingFeedback(select) {
+            const form = select.closest('.purchase-form');
+            const isPurchased = select.value === 'Purchased';
+            const ratingInput = form.querySelector('input[name="rating"]');
+            const feedbackTextarea = form.querySelector('textarea[name="feedback"]');
+            ratingInput.style.display = isPurchased ? 'block' : 'none';
+            feedbackTextarea.style.display = isPurchased ? 'block' : 'none';
+            ratingInput.required = isPurchased;
+        }
+    </script>
+</body>
+</html>

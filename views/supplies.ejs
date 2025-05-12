@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/css/navstyle.css">
+<link rel="stylesheet" href="/css/footstyle.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplies - SkillLink</title>
+    <link rel="stylesheet" href="/css/supplies.css">
+    <link rel="stylesheet" href="/css/navstyle.css">
+    <link rel="stylesheet" href="/css/footstyle.css">
+</head>
+<body>
+<%- include("partials/navbar") %>
+
+    <!-- Navbar will be loaded dynamically -->
+    <header>
+        <div id="navbar"></div>
+    </header>
+    <section class="supplies-hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="text-content">
+                <h1>Your Ultimate Marketplace for Parts & Materials</h1>
+                <p>Save time and money—request quotes from local sellers and get the best deals.</p>
+                <a href="/suppliesform1" class="cta-button">Request a Quote</a>
+            </div>
+            <div class="image-content">
+                <img src="/images/suppliesimg.webp" alt="Marketplace Illustration">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="why-choose-us">
+    <div class="container">
+        <div class="benefits">
+            <div class="benefit-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/7767/7767415.png" alt="Save Money">
+                <h3>Save Money</h3>
+                <p>Compare prices and reduce procurement costs by up to 15%.</p>
+            </div>
+            <div class="benefit-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/1451/1451868.png" alt="Save Time">
+                <h3>Save Time</h3>
+                <p>Instant quotes from local suppliers, cutting 35% of shopping time.</p>
+            </div>
+            <div class="benefit-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3062/3062293.png" alt="Gain Control">
+                <h3>Gain Control</h3>
+                <p>Manage costs efficiently and optimize your supply chain.</p>
+            </div>
+            <div class="benefit-card">
+                <img src="https://png.pngtree.com/png-clipart/20230923/original/pngtree-comicstyle-frustration-icon-with-mind-and-business-concept-vector-png-image_12834402.png" alt="No Frustration">
+                <h3>No Frustration</h3>
+                <p>Minimize errors in orders by up to 90%.</p>
+            </div>
+        </div>
+
+        <div class="why-content">
+            <span class="tag">WHY CHOOSE US</span>
+            <h2>Why Use SkillLink?</h2>
+            <p>Take full control of your procurement and access the best deals from trusted local suppliers. Optimize your costs and streamline your orders with ease.</p>
+            <a href="/suppliesform1" class="cta-button">Submit Quote Request</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div id="footer"></div>
+</footer>
+<!-- Link to JavaScript file -->
+<script src="/js/script.js"></script>
+<%- include("partials/footer") %>
+</body>
+</html>

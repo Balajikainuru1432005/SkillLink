@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Service | SkillLink</title>     
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/navstyle.css">
+    <link rel="stylesheet" href="/css/footstyle.css">
+</head>
+<body>
+<%- include("partials/navbar") %>
+    <header>
+        <div id="navbar"></div>
+    </header>
+    <section class="hero" style="background-image: url(https://example.com/driver-bg.jpg);">
+        <div class="hero-container">
+            <h1>Driver Service</h1>
+            <p>Reliable drivers for your transportation needs.</p>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <section class="features">
+            <div class="features-container">
+                <div class="feature-card">
+                    <h3 class="work">Driver Services</h3>
+                </div>
+                <div class="feature-card">
+                    <p class="breifing">Safe and professional driving services.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="booking" class="booking">
+            <div class="booking-container">
+                <div class="booking-form">
+                    <h2>Book Your Driver</h2>
+                    <form id="serviceForm" action="/book-service" method="POST">
+                        <div class="form-group">
+                            <label for="zipcode">ZIP Code</label>
+                            <input type="text" id="zipcode" name="zipcode" required placeholder="Enter your ZIP code">
+                        </div>
+                        <div class="form-group">
+                            <label for="service-group">Service Group</label>
+                            <select id="service-group" name="serviceGroup" required disabled>
+                                <option value="driver-service" selected>Driver Service</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="service-type">Specific Service</label>
+                            <select id="service-type" name="serviceType" required>
+                                <option value="car-driver">Car Driver</option>
+                                <option value="bike-driver">Bike Driver</option>
+                                <option value="temporary-driver">Temporary Driver</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Preferred Date</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Preferred Time</label>
+                            <select id="time" name="time" required>
+                                <option value="">Select time slot</option>
+                                <option value="morning">Morning (8am - 12pm)</option>
+                                <option value="afternoon">Afternoon (12pm - 4pm)</option>
+                                <option value="evening">Evening (4pm - 8pm)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="service-details">Describe Your Requirement</label>
+                            <textarea id="service-details" name="details" rows="4" placeholder="Mention trip details, duration, etc."></textarea>
+                        </div>
+                        <div class="price-calculator">
+                            <h3>Estimated Price</h3>
+                            <p>Starting from ₹299</p>
+                            <small>Final price may vary based on distance and duration</small>
+                        </div>
+                        <button type="submit" class="submit-button">Book Now</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="how-it-works">
+        <h2>How SkillLink Works</h2>
+        <div class="steps">
+            <div class="step">
+                <img src="calender.png" alt="Pick a Time">
+                <h3>Choose Your Service</h3>
+                <p>Select your driving service.</p>
+            </div>
+            <div class="step">
+                <img src="booking.png" alt="Book Instantly">
+                <h3>Confirm Booking</h3>
+                <p>Get responses from drivers and confirm.</p>
+            </div>
+            <div class="step">
+                <img src="pro1.png" alt="Your Driver Arrives">
+                <h3>Your Driver Arrives</h3>
+                <p>A reliable driver arrives on time.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero1">
+        <div class="hero-container">
+            <a href="#booking" class="nav-button">Book Now</a>
+        </div>
+    </section>
+
+    <section class="features_1">
+        <div class="features-container_1">
+            <div class="feature-card_1">
+                <div class="feature-icon_1">🚗</div>
+                <h3>Reliable Drivers</h3>
+                <p>Our drivers ensure safe and timely travel.</p>
+            </div>
+            <div class="feature-card_1">
+                <div class="feature-icon_1">✅</div>
+                <h3>Verified & Trusted</h3>
+                <p>All our drivers are verified and experienced.</p>
+            </div>
+            <div class="feature-card_1">
+                <div class="feature-icon_1">⏳</div>
+                <h3>Same-Day Service</h3>
+                <p>Book today and get a driver as soon as today.</p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div id="footer"></div>
+    </footer>
+    <script src="/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const dateInput = document.getElementById('date');
+        dateInput.min = new Date().toISOString().split('T')[0];
+
+        const zipcodeInput = document.getElementById('zipcode');
+        zipcodeInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);
+        });
+    });
+    </script>
+<%- include("partials/footer") %>
+</body>
+</html>

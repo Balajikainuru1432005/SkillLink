@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Dashboard | SkillLink</title>
+    <link rel="stylesheet" href="/css/worker_dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body style="padding-top: 60px; padding-bottom: 80px; margin: 0;">
+    <header style="background: #333; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; width: 100%; position: fixed; top: 0; z-index: 1000;">
+        <div style="display: flex; align-items: center;">
+            <img src="/images/SkillLink_logo.png" alt="SkillLink" style="height: 40px; margin-right: 10px; border-radius: 50%;">
+            <span style="font-size: 24px; font-weight: bold;">SkillLink</span>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <a href="/supplies" target="_blank" style="background: #4CAF50; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; margin-right: 15px;">Buy Supplies</a>
+            <a href="/worker_profile"><img src="<%= profilePhoto %>" alt="Profile" style="height: 30px; cursor: pointer; border-radius: 50%;"></a>
+        </div>
+    </header>
+
+    <div class="sidebar">
+        <h2>SkillLink</h2>
+        <ul>
+            <li class="menu-item <%= activeSection === 'requests' ? 'active' : '' %>" data-section="requests">Requests</li>
+            <li class="menu-item <%= activeSection === 'earnings' ? 'active' : '' %>" data-section="earnings">Earnings</li>
+            <li class="menu-item <%= activeSection === 'performance' ? 'active' : '' %>" data-section="performance">Performance</li>
+            <li class="menu-item <%= activeSection === 'work-history' ? 'active' : '' %>" data-section="work-history">Work History</li>
+            <li class="menu-item <%= activeSection === 'settings' ? 'active' : '' %>" data-section="settings">Settings</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h2>Worker Dashboard</h2>
+            <div class="profile">
+                <a href="/worker_profile"><img src="<%= profilePhoto %>" alt="Worker" class="profile-pic"></a>
+                <span class="worker-name"><%= workerName %></span>
+            </div>
+        </header>
+
+        <div id="content-area">
+           <div id="requests" class="content-section <%= activeSection === 'requests' ? 'active' : '' %>">
+    <div class="section-card">
+        <h3>Upcoming Job Requests</h3>
+        <div class="job-list" id="requests-list">
+            <% if (jobRequests.length === 0) { %>
+                <p>No pending job requests.</p>
+            <% } else { %>
+                <% jobRequests.forEach(job => { %>
+                    <div class="job-card" data-job-id="<%= job._id %>">
+                        <div class="job-header"><%= job.header %></div>
+                        <p><span class="label">Customer:</span> <%= job.customer %></p>
+                        <p><span class="label">Location:</span> <%= job.location %></p>
+                        <p><span class="label">Time:</span> <%= job.time %></p>
+                        <p><span class="label">Description:</span> <%= job.description %></p>
+                        <p><span class="label">Status:</span> <%= job.status %></p>
+                        <% if (job.status === 'pending') { %>
+                            <div class="job-actions">
+                                <input type="number" class="price-input" placeholder="Set Price (₹)" min="1" step="1" required>
+                                <button class="accept-btn">Accept</button>
+                                <button class="reject-btn">Reject</button>
+                            </div>
+                        <% } %>
+                    </div>
+                <% }) %>
+            <% } %>
+        </div>
+    </div>
+</div>
+            </div>
+
+<div id="earnings" class="content-section <%= activeSection === 'earnings' ? 'active' : '' %>">
+    <div class="section-card">
+        <h3>Earnings Overview</h3>
+        <div class="earnings-wrapper">
+            <div class="earnings-summary">
+                <div class="earnings-item">
+                    <span class="earnings-label">Total Earnings</span>
+                    <span class="earnings-value" id="total-earnings">₹<%= earnings.total.toFixed(2) %></span>
+                </div>
+                <div class="earnings-breakdown">
+                    <div class="earnings-item">
+                        <span class="earnings-label">Completed</span>
+                        <span class="earnings-value" id="completed-earnings">₹<%= earnings.completed.toFixed(2) %></span>
+                    </div>
+                    <div class="earnings-item">
+                        <span class="earnings-label">Pending</span>
+                        <span class="earnings-value" id="pending-earnings">₹<%= earnings.pending.toFixed(2) %></span>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="earningsChart" width="300" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+            <div id="performance" class="content-section <%= activeSection === 'performance' ? 'active' : '' %>">
+                <div class="section-card">
+                    <h3>Performance</h3>
+                    <ul class="performance-stats">
+                        <li><span class="stat-label">Jobs Completed:</span> <span><%= performance.jobsCompleted %></span></li>
+                        <li><span class="stat-label">Positive Reviews:</span> <span><%= performance.positiveReviews.toFixed(1) %>%</span></li>
+                    </ul>
+                </div>
+            </div>
+
+<div id="work-history" class="content-section <%= activeSection === 'work-history' ? 'active' : '' %>">
+    <div class="section-card">
+        <h3>Work History</h3>
+        <table class="work-history-table">
+            <thead>
+                <tr>
+                    <th>Job</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                    <th>Rating</th>
+                    <th>Feedback</th>
+                </tr>
+            </thead>
+            <tbody id="work-history-body">
+                <% if (workHistory.length === 0) { %>
+                    <tr><td colspan="6">No work history available.</td></tr>
+                <% } else { %>
+                    <% workHistory.forEach(work => { %>
+                        <tr>
+                            <td><%= work.job %></td>
+                            <td><%= work.customer %></td>
+                            <td><%= work.date %></td>
+                            <td><%= work.price %></td>
+                            <td><%= work.rating || 'N/A' %></td>
+                            <td><%= work.feedback || 'N/A' %></td>
+                        </tr>
+                    <% }) %>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+            <div id="settings" class="content-section <%= activeSection === 'settings' ? 'active' : '' %>">
+                <div class="section-card">
+                    <h3>Settings</h3>
+                    <div class="settings-options">
+                        <a href="/worker_profile" class="settings-btn">Update Your Profile</a>
+                        <button class="settings-btn">Change Password</button>
+                        <button id="logout-btn" class="settings-btn logout">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: #333; color: white; padding: 20px; text-align: center; width: 100%; position: fixed; bottom: 0;">
+        <div style="margin-bottom: 10px;">
+            <a href="#" style="color: #fff; text-decoration: none; margin: 0 15px;">Terms and Conditions</a>
+            <a href="#" style="color: #fff; text-decoration: none; margin: 0 15px;">About Us</a>
+            <a href="#" style="color: #fff; text-decoration: none; margin: 0 15px;">Worker Guidelines</a>
+            <a href="#" style="color: #fff; text-decoration: none; margin: 0 15px;">Payments and Support</a>
+        </div>
+        <div><p style="margin: 0; font-size: 14px;">© 2025 SkillLink. All rights reserved.</p></div>
+    </footer>
+
+    <script src="/js/worker_dashboard.js"></script>
+    
+</body>
+</html>

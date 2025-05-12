@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SkillLink</title>
+    <link rel="stylesheet" href="/css/admin_dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/admin_dashboard.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="nav-left">
+                <img src="/images/SkillLink_logo.png" alt="SkillLink Logo" class="logo"> 
+                <span class="brand-name">SkillLink</span>
+            </div>
+            <div class="nav-right">
+                <a href="/logout" class="logout-btn">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <ul>
+            <li class="menu-item active" data-section="dashboard">Dashboard</li>
+            <li class="menu-item" data-section="customers">Customers</li>
+            <li class="menu-item" data-section="workers">Workers</li>
+            <li class="menu-item" data-section="sellers">Sellers</li>
+            <li class="menu-item" data-section="website-analytics">Website Analytics</li>
+            <li class="menu-item" data-section="settings">Settings</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h1 id="page-title">Dashboard</h1>
+
+        <section id="dashboard" class="content-section active">
+            <h2>Overall Statistics</h2>
+            <div class="stats-container">
+                <div class="stat-box"><h3>Total Customers</h3><p id="total-customers"><%= totalCustomers %></p></div>
+                <div class="stat-box"><h3>Total Workers</h3><p id="total-workers"><%= totalWorkers %></p></div>
+                <div class="stat-box"><h3>Total Sellers</h3><p id="total-sellers"><%= totalSellers %></p></div>
+            </div>
+            <div class="charts-container">
+                <canvas id="chart-pie"></canvas>
+                <canvas id="chart-bar"></canvas>
+                <canvas id="chart-line"></canvas>
+            </div>
+        </section>
+
+        <section id="customers" class="content-section">
+            <h2>Customer Information</h2>
+            <table>
+                <thead>
+                    <tr><th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                    <% customers.forEach(customer => { %>
+                        <tr data-id="<%= customer.email %>" data-type="customer">
+                            <td><%= customer.firstName %> <%= customer.lastName %></td>
+                            <td><%= customer.email %></td>
+                            <td><%= customer.phone %></td>
+                            <td><%= [customer.flat, customer.area, customer.landmark, customer.town, customer.state + ' - ' + customer.pincode, customer.district].filter(Boolean).join(', ') %></td>
+                            <td><button class="remove-btn" onclick="removeUser('<%= customer.email %>', 'customer')">Remove</button></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="workers" class="content-section">
+            <h2>Worker Information</h2>
+            <table>
+                <thead>
+                    <tr><th>Name</th><th>Skill</th><th>Phone</th><th>Email</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                    <% workers.forEach(worker => { %>
+                        <tr data-id="<%= worker.email %>" data-type="worker">
+                            <td><%= worker.firstName %> <%= worker.lastName %></td>
+                            <td><%= worker.primarySkill %></td>
+                            <td><%= worker.phone %></td>
+                            <td><%= worker.email %></td>
+                            <td><button class="remove-btn" onclick="removeUser('<%= worker.email %>', 'worker')">Remove</button></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="sellers" class="content-section">
+            <h2>Seller Information</h2>
+            <table>
+                <thead>
+                    <tr><th>Name</th><th>Shop Name</th><th>Phone</th><th>Email</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                    <% sellers.forEach(seller => { %>
+                        <tr data-id="<%= seller.email %>" data-type="seller">
+                            <td><%= seller.firstName %> <%= seller.lastName %></td>
+                            <td><%= seller.shopName %></td>
+                            <td><%= seller.phone %></td>
+                            <td><%= seller.email %></td>
+                            <td><button class="remove-btn" onclick="removeUser('<%= seller.email %>', 'seller')">Remove</button></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="website-analytics" class="content-section">
+            <h2>Website Analytics</h2>
+            <div class="analytics-box">
+                <p><strong>Total Visitors:</strong> <%= totalVisitors %></p>
+                <p><strong>Active Users:</strong> <%= activeUsers %></p>
+                <p><strong>Most Requested Services:</strong> <%= mostRequestedServices %></p>
+                <p><strong>Total Transactions:</strong> <%= totalTransactions %></p>
+                <p><strong>Average Service Rating:</strong> <%= averageRating %> ⭐</p>
+                <p><strong>Average Response Time:</strong> <%= avgResponseTime %></p>
+            </div>
+        </section>
+
+        <section id="settings" class="content-section">
+            <h2>Settings</h2>
+            <button onclick="updateProfile()">Update Profile</button>
+            <button onclick="updateInfo()">Update Info</button>
+        </section>
+
+        <div id="notification"></div>
+    </div>
+</body>
+</html>

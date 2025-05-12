@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Sign-Up</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #dfe7fd, #a8c0ff);
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 20px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .left {
+            flex: 0.8;
+            background: url('/images/4957136.jpg') center/cover no-repeat;
+            min-height: 400px;
+        }
+        .right {
+            flex: 1.2;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            width: 100%;
+        }
+        input, select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+        }
+        .profile-photo-container {
+            margin: 15px 0;
+            text-align: center;
+            position: relative;
+        }
+        #profilePhoto {
+            display: none;
+        }
+        .profile-photo-label {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #6c88f7;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .profile-photo-label:hover {
+            background: #576fc9;
+            transform: translateY(-2px);
+        }
+        #profilePhotoName {
+            font-size: 12px;
+            color: #555;
+            margin-top: 8px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #6c88f7;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background: #576fc9;
+            transform: scale(1.05);
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left"></div>
+        <div class="right">
+            <h2>Customer Sign Up</h2>
+            <form id="signupForm" enctype="multipart/form-data">
+                <div class="profile-photo-container">
+                    <label for="profilePhoto" class="profile-photo-label">Upload Profile Photo</label>
+                    <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*" required>
+                    <div id="profilePhotoName"></div>
+                    <div class="error" id="photoError"></div>
+                </div>
+
+                <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                <div class="error" id="nameError"></div>
+
+                <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+                <div class="error" id="phoneError"></div>
+
+                <input type="email" id="email" name="email" placeholder="Email Address" required>
+                <div class="error" id="emailError"></div>
+
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <div class="error" id="passwordError"></div>
+
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                <div class="error" id="confirmPasswordError"></div>
+
+                <fieldset>
+                    <legend>Address Details</legend>
+                    <input type="text" id="flat" name="flat" placeholder="Flat, House no., Building" required>
+                    <div class="error" id="flatError"></div>
+
+                    <input type="text" id="area" name="area" placeholder="Area, Street, Sector" required>
+                    <div class="error" id="areaError"></div>
+
+                    <input type="text" id="landmark" name="landmark" placeholder="Landmark" required>
+                    <div class="error" id="landmarkError"></div>
+
+                    <input type="text" id="pincode" name="pincode" placeholder="6-digit Pincode" required>
+                    <div class="error" id="pincodeError"></div>
+
+                    <input type="text" id="town" name="town" placeholder="Town/City" required>
+                    <div class="error" id="townError"></div>
+
+                    <select id="state" name="state" required>
+                        <option value="">Select State</option>
+                        <% Object.keys(stateDistrictMap).forEach(state => { %>
+                            <option value="<%= state %>"><%= state %></option>
+                        <% }); %>
+                    </select>
+                    <div class="error" id="stateError"></div>
+
+                    <select id="district" name="district" required disabled>
+                        <option value="">Select District</option>
+                    </select>
+                    <div class="error" id="districtError"></div>
+                </fieldset>
+
+                <input type="hidden" name="role" value="customer">
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const stateDistrictMap = <%- JSON.stringify(stateDistrictMap) %>;
+
+        // Populate districts based on selected state
+        document.getElementById('state').addEventListener('change', function () {
+            const selectedState = this.value;
+            const districtSelect = document.getElementById('district');
+            districtSelect.innerHTML = '<option value="">Select District</option>';
+            districtSelect.disabled = !selectedState;
+            if (selectedState && stateDistrictMap[selectedState]) {
+                stateDistrictMap[selectedState].forEach(district => {
+                    const option = document.createElement('option');
+                    option.value = district;
+                    option.textContent = district;
+                    districtSelect.appendChild(option);
+                });
+            }
+        });
+
+        const profilePhotoInput = document.getElementById('profilePhoto');
+        const profilePhotoName = document.getElementById('profilePhotoName');
+        profilePhotoInput.addEventListener('change', function () {
+            profilePhotoName.textContent = this.files[0] ? this.files[0].name : 'No file selected';
+        });
+
+        function validateField(field, regex, errorMsg, errorElementId) {
+            const errorElement = document.getElementById(errorElementId);
+            if (!regex.test(field.value.trim())) {
+                errorElement.textContent = errorMsg;
+                return false;
+            } else {
+                errorElement.textContent = '';
+                return true;
+            }
+        }
+
+        function validateProfilePhoto(fileInput) {
+            const errorElement = document.getElementById('photoError');
+            if (!fileInput.files || !fileInput.files[0]) {
+                errorElement.textContent = 'Profile photo is required';
+                return false;
+            }
+            const file = fileInput.files[0];
+            const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            const maxSize = 5 * 1024 * 1024; // 5MB
+            if (!validTypes.includes(file.type)) {
+                errorElement.textContent = 'Only JPG, PNG, or GIF files are allowed';
+                return false;
+            }
+            if (file.size > maxSize) {
+                errorElement.textContent = 'File size must be less than 5MB';
+                return false;
+            }
+            errorElement.textContent = '';
+            return true;
+        }
+
+        async function checkEmailUniqueness(email) {
+            try {
+                const response = await fetch('/check-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+                return !data.exists;
+            } catch (error) {
+                console.error('Error checking email:', error);
+                return false;
+            }
+        }
+
+        async function checkPhoneUniqueness(phone) {
+            try {
+                const response = await fetch('/check-phone', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone })
+                });
+                const data = await response.json();
+                return !data.exists;
+            } catch (error) {
+                console.error('Error checking phone:', error);
+                return false;
+            }
+        }
+
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            let isValid = true;
+
+            // Validate fields
+            isValid &= validateField(document.getElementById('firstName'), /^[A-Za-z\s]+$/, 'First name should only contain letters', 'nameError');
+            isValid &= validateField(document.getElementById('lastName'), /^[A-Za-z\s]+$/, 'Last name should only contain letters', 'nameError');
+            isValid &= validateField(document.getElementById('phone'), /^\d{10}$/, 'Phone number must be 10 digits', 'phoneError');
+            isValid &= validateField(document.getElementById('email'), /^[^\s@]+@[^\s@]+\.(com|in|org|net|edu|gov)$/, 'Invalid email format', 'emailError');
+            isValid &= validateField(document.getElementById('password'), /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/, 'Password must be at least 6 characters with 1 uppercase, 1 number, 1 special character', 'passwordError');
+            isValid &= validateField(document.getElementById('flat'), /.+/, 'Flat/House number is required', 'flatError');
+            isValid &= validateField(document.getElementById('area'), /.+/, 'Area/Street is required', 'areaError');
+            isValid &= validateField(document.getElementById('landmark'), /.+/, 'Landmark is required', 'landmarkError');
+            isValid &= validateField(document.getElementById('pincode'), /^\d{6}$/, 'Pincode must be 6 digits', 'pincodeError');
+            isValid &= validateField(document.getElementById('town'), /.+/, 'Town/City is required', 'townError');
+            isValid &= validateField(document.getElementById('state'), /.+/, 'State is required', 'stateError');
+            isValid &= validateField(document.getElementById('district'), /.+/, 'District is required', 'districtError');
+            isValid &= validateProfilePhoto(document.getElementById('profilePhoto'));
+
+            // Validate password confirmation
+            const password = document.getElementById('password').value.trim();
+            const confirmPassword = document.getElementById('confirmPassword').value.trim();
+            if (password !== confirmPassword) {
+                document.getElementById('confirmPasswordError').textContent = 'Passwords do not match';
+                isValid = false;
+            } else {
+                document.getElementById('confirmPasswordError').textContent = '';
+            }
+
+            // Check email and phone uniqueness
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const emailUnique = await checkEmailUniqueness(email);
+            const phoneUnique = await checkPhoneUniqueness(phone);
+            if (!emailUnique) {
+                document.getElementById('emailError').textContent = 'Email already in use';
+                isValid = false;
+            }
+            if (!phoneUnique) {
+                document.getElementById('phoneError').textContent = 'Phone number already in use';
+                isValid = false;
+            }
+
+            if (isValid) {
+                const formData = new FormData(e.target);
+                try {
+                    const response = await fetch('/signup', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const data = await response.json();
+                    if (response.ok && data.success) {
+                        alert('Signup successful! Please login.');
+                        window.location.href = '/login';
+                    } else {
+                        alert('Error: ' + (data.error || 'Signup failed'));
+                    }
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    alert('Network error: Unable to connect to the server.');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

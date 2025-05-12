@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/css/navstyle.css">
+<link rel="stylesheet" href="/css/footstyle.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Responses | SkillLink</title>
+    <link rel="stylesheet" href="/css/worker_responses.css">
+    <link rel="stylesheet" href="/css/navstyle.css">
+    <link rel="stylesheet" href="/css/footstyle.css">
+</head>
+<body>
+<%- include("partials/navbar") %>
+    <header>
+        <div id="navbar"></div>
+    </header>
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <h2>Available Workers for Wiring Fix</h2>
+        </header>
+
+        <!-- Worker Responses Section -->
+        <section class="worker-responses">
+            <h3>Worker Responses</h3>
+            <div class="worker-grid">
+                <div class="worker-card" data-worker="john">
+                    <div class="worker-summary">
+                        <img src="john_profile.png" alt="John Doe's Profile" class="profile-pic">
+                        <div class="summary-text">
+                            <p><strong>Worker:</strong> John Doe</p>
+                            <p><strong>Rating:</strong> 4.8/5</p>
+                            <p><strong>Price:</strong> $75</p>
+                        </div>
+                    </div>
+                    <div class="worker-details" id="details-john"></div>
+                </div>
+                <div class="worker-card" data-worker="jane">
+                    <div class="worker-summary">
+                        <img src="jane_profile.png" alt="Jane Wilson's Profile" class="profile-pic">
+                        <div class="summary-text">
+                            <p><strong>Worker:</strong> Jane Wilson</p>
+                            <p><strong>Rating:</strong> 4.5/5</p>
+                            <p><strong>Price:</strong> $80</p>
+                        </div>
+                    </div>
+                    <div class="worker-details" id="details-jane"></div>
+                </div>
+                <div class="worker-card" data-worker="mike">
+                    <div class="worker-summary">
+                        <img src="mike_profile.png" alt="Mike Brown's Profile" class="profile-pic">
+                        <div class="summary-text">
+                            <p><strong>Worker:</strong> Mike Brown</p>
+                            <p><strong>Rating:</strong> 4.9/5</p>
+                            <p><strong>Price:</strong> $70</p>
+                        </div>
+                    </div>
+                    <div class="worker-details" id="details-mike"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #2a2e37; color: white; text-align: center; padding: 20px 0;">
+        <div id="footer"></div>
+    </footer>
+    <script src="/js/script.js" ></script>
+    <script src="/js/worker_responses.js"></script>
+<%- include("partials/footer") %>
+</body>
+</html>

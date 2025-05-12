@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/css/navstyle.css">
+<link rel="stylesheet" href="/css/footstyle.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller FAQs - SkillLink</title>
+    <link rel="stylesheet" href="/css/styles_foot.css">
+</head>
+<body>
+    <%- include("partials/navbar") %>
+
+    <nav>
+        <div class="navbar">
+            <!-- Left Section (Logo + Name + Home) -->
+            <div class="nav-left">
+                <img src="/images/SkillLink_logo.png" alt="SkillLink Logo" class="logo"> 
+                <span class="brand-name">SkillLink</span>
+                <a href="/" class="nav-link">Home</a>
+            </div>
+    
+            <!-- Right Section (Dropdown + Conditional Content) -->
+            <div class="nav-right">
+                <!-- Dropdown for Services -->
+                <div class="dropdown">
+                    <button class="dropbtn">All Services ▼</button>
+                    <div class="dropdown-content">
+                        <a href="/services">Services</a>
+                        <a href="/supplies">Supplies</a>
+                    </div>
+                </div>
+    
+                <!-- Conditional Login/Signup or Hamburger Menu -->
+                <div id="auth-section">
+                    <!-- Default state: Login/Signup button -->
+                    <a href="//public/login" class="btn" id="login-signup-btn">Login/Signup</a>
+                    <!-- Logged-in state: Hamburger menu (hidden by default) -->
+                    <div class="hamburger-menu" id="hamburger-menu" style="display: none;">
+                        <div class="hamburger-icon">☰</div>
+                        <div class="menu-content">
+                            <a href="/customer_dashboard" class="dashboard-link">Dashboard</a>
+                            <span class="close-menu">X</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="header-image">
+        <h1>Seller FAQs</h1>
+        <p>Answers to common questions for sellers.</p>
+    </div>
+
+    <div class="container">
+        <section>
+            <h2>How do I become a seller?</h2>
+            <p>Simply sign up on SkillLink, provide your service details, and complete the verification process.</p>
+        </section>
+
+        <section>
+            <h2>What services can I offer?</h2>
+            <p>SkillLink allows sellers to offer a wide range of services including home maintenance, beauty, tutoring, and more.</p>
+        </section>
+
+        <section>
+            <h2>How do I get paid?</h2>
+            <p>Payments are processed securely through our system. Sellers receive payouts every week.</p>
+        </section>
+    </div>
+   
+<%- include("partials/footer") %>
+</body>
+</html>

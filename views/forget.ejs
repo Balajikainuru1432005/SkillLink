@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/css/navstyle.css">
+<link rel="stylesheet" href="/css/footstyle.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="/css/forget.css" rel="stylesheet">
+</head>
+<body>
+<%- include("partials/navbar") %>
+    <div class="container">
+        <div class="form-container">
+            <h2>Forgot Password</h2>
+            <p>Enter your email address or phone number,<br> we'll send you a link to reset your password.</p>
+            <form id="forgotPasswordForm">
+                <div class="input-box">
+                    <input type="text" id="emailOrPhone" placeholder="Email or Phone Number" required>
+                    <i class='bx bx-user'></i>
+                </div>
+                <div class="error" id="emailOrPhoneError"></div>
+
+                <!-- Submit Button -->
+                <button type="submit">Send</button>
+
+                <!-- Back to Login Link -->
+                <p class="back-to-login">
+                    Remember your password? <a href="/login">Login here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/forget.js">
+  
+    </script>
+<%- include("partials/footer") %>
+</body>
+</html>

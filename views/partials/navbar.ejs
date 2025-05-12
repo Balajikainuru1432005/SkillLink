@@ -1,0 +1,56 @@
+<nav class="navbar">
+    <!-- Left Section (Logo + Name + Home) -->
+    <div class="nav-left">
+        <img src="/images/SkillLink_logo.png" alt="SkillLink Logo" class="logo"> 
+        <span class="brand-name">SkillLink</span>
+        <a href="/" class="nav-link">Home</a>
+    </div>
+
+    <!-- Right Section (Dropdown + Conditional Content) -->
+    <div class="nav-right">
+        <!-- Dropdown for Services -->
+        <div class="dropdown">
+            <button class="dropbtn">All Services ▼</button>
+            <div class="dropdown-content">
+                <a href="/services">Services</a>
+                <a href="/supplies">Supplies</a>
+            </div>
+        </div>
+
+        <!-- Conditional Login/Signup or Hamburger Menu -->
+        <div id="auth-section">
+            <% if (typeof isLoggedIn !== 'undefined' && isLoggedIn) { %>
+                <!-- Logged-in state: Hamburger menu -->
+                <div class="hamburger-menu" id="hamburger-menu">
+                    <div class="hamburger-icon">☰</div>
+                    <div class="menu-content" id="menu-content" style="display: none;">
+                        <a href="/customer_dashboard" class="dashboard-link">Dashboard</a>
+                        <a href="/customer_profile" class="profile-link">Profile</a>
+                        <a href="/logout" class="logout-link">Logout</a>
+                        <span class="close-menu">X</span>
+                    </div>
+                </div>
+            <% } else { %>
+                <!-- Default state: Login/Signup button -->
+                <a href="/login" class="btn" id="login-signup-btn">Login/Signup</a>
+            <% } %>
+        </div>
+    </div>
+</nav>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const hamburgerIcon = document.querySelector(".hamburger-icon");
+        const menuContent = document.getElementById("menu-content");
+        const closeMenu = document.querySelector(".close-menu");
+
+        if (hamburgerIcon && menuContent && closeMenu) {
+            hamburgerIcon.addEventListener("click", function () {
+                menuContent.style.display = menuContent.style.display === "none" ? "block" : "none";
+            });
+            closeMenu.addEventListener("click", function () {
+                menuContent.style.display = "none";
+            });
+        }
+    });
+</script>

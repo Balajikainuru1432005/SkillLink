@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Electrician Service | SkillLink</title>     
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/navstyle.css">
+    <link rel="stylesheet" href="/css/footstyle.css">
+</head>
+<body>
+<%- include("partials/navbar") %>
+    <header>
+        <div id="navbar"></div>
+    </header>
+    <section class="hero" style="background-image: url(http://www.sparkywilmington.com/wp-content/uploads/2023/08/Reliability-Meets-Professionalism-General-Electrician.gif);">
+        <div class="hero-container">
+            <h1>General Electrician Service</h1>
+            <p>Hire expert electricians for all your electrical needs.</p>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <section class="features">
+            <div class="features-container">
+                <div class="feature-card">
+                    <h3 class="work">General Electrician Services</h3>
+                </div>
+                <div class="feature-card">
+                    <p class="breifing">Professional electrical services for installation, repair, and upgrades.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="booking" class="booking">
+            <div class="booking-container">
+                <div class="booking-form">
+                    <h2>Book Your General Electrician</h2>
+                    <form id="serviceForm" action="/book-service" method="POST">
+                        <div class="form-group">
+                            <label for="zipcode">ZIP Code</label>
+                            <input type="text" id="zipcode" name="zipcode" required placeholder="Enter your ZIP code">
+                        </div>
+                        <div class="form-group">
+                            <label for="service-group">Service Group</label>
+                            <select id="service-group" name="serviceGroup" required onchange="updateServiceTypes()">
+                                <option value="">Select Service Group</option>
+                                <option value="installation-setup">Installation & Setup</option>
+                                <option value="repair-maintenance">Repair & Maintenance</option>
+                                <option value="safety-upgrades">Safety & Upgrades</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="service-type">Specific Service</label>
+                            <select id="service-type" name="serviceType" required disabled>
+                                <option value="">Select a Service Group first</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Preferred Date</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        <div class="form-group">
+<label for="phone">phone</label>
+<input type="text"id="phone" required placeholder="enter your ph.no">
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Preferred Time</label>
+                            <select id="time" name="time" required>
+                                <option value="">Select time slot</option>
+                                <option value="morning">Morning (8am - 12pm)</option>
+                                <option value="afternoon">Afternoon (12pm - 4pm)</option>
+                                <option value="evening">Evening (4pm - 8pm)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="service-details">Describe Your Requirement</label>
+                            <textarea id="service-details" name="details" rows="4" placeholder="Mention details like specific needs, urgency, etc."></textarea>
+                        </div>
+                        <div class="price-calculator">
+                            <h3>Estimated Price</h3>
+                            <p>Starting from ₹499</p>
+                            <small>Final price may vary based on service complexity</small>
+                        </div>
+                        <button type="submit" class="submit-button">Book Now</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="how-it-works">
+        <h2>How SkillLink Works</h2>
+        <div class="steps">
+            <div class="step">
+                <img src="calender.png" alt="Pick a Time">
+                <h3>Choose Your Service</h3>
+                <p>Select your specific electrical service.</p>
+            </div>
+            <div class="step">
+                <img src="booking.png" alt="Book Instantly">
+                <h3>Confirm Booking</h3>
+                <p>Get responses from professionals and confirm.</p>
+            </div>
+            <div class="step">
+                <img src="pro1.png" alt="Your Electrician Arrives">
+                <h3>Your Electrician Arrives</h3>
+                <p>A certified electrician arrives on time.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero1">
+        <div class="hero-container">
+            <a href="#booking" class="nav-button">Book Now</a>
+        </div>
+    </section>
+
+    <section class="features_1">
+        <div class="features-container_1">
+            <div class="feature-card_1">
+                <div class="feature-icon_1">⚡</div>
+                <h3>Expert Electrical Work</h3>
+                <p>Our professionals ensure safety and efficiency.</p>
+            </div>
+            <div class="feature-card_1">
+                <div class="feature-icon_1">🔌</div>
+                <h3>Certified & Trusted</h3>
+                <p>All our electricians are experienced and certified.</p>
+            </div>
+            <div class="feature-card_1">
+                <div class="feature-icon_1">⏳</div>
+                <h3>Same-Day Service</h3>
+                <p>Book today and get service as soon as today.</p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div id="footer"></div>
+    </footer>
+    <script src="/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const dateInput = document.getElementById('date');
+        dateInput.min = new Date().toISOString().split('T')[0];
+
+        const zipcodeInput = document.getElementById('zipcode');
+        zipcodeInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);
+        });
+    });
+
+        function updateServiceTypes() {
+            const serviceGroup = document.getElementById('service-group').value;
+            const serviceTypeSelect = document.getElementById('service-type');
+            serviceTypeSelect.innerHTML = ''; // Clear previous options
+            serviceTypeSelect.disabled = false; // Enable the dropdown
+
+            const serviceTypes = {
+                'installation-setup': [
+                    { value: 'wiring-circuit', text: 'Wiring & Circuit Installation' },
+                    { value: 'switchboard-socket', text: 'Switchboard & Socket Installation' },
+                    { value: 'lighting-fan', text: 'Lighting & Fan Installation' },
+                    { value: 'inverter-battery', text: 'Inverter & Battery Setup' }
+                ],
+                'repair-maintenance': [
+                    { value: 'faulty-wiring', text: 'Faulty Wiring Repair' },
+                    { value: 'short-circuit', text: 'Short Circuit Fixing' },
+                    { value: 'appliance-repair', text: 'Electrical Appliance Repair' },
+                    { value: 'fuse-mcb', text: 'Fuse & MCB Replacement' }
+                ],
+                'safety-upgrades': [
+                    { value: 'earthing-grounding', text: 'Earthing & Grounding Work' },
+                    { value: 'surge-protector', text: 'Surge Protector & Stabilizer Installation' },
+                    { value: 'load-balancing', text: 'Load Balancing & Energy Efficiency Solutions' },
+                    { value: 'smart-home', text: 'Smart Home Electrical Upgrades' }
+                ]
+            };
+
+            if (serviceGroup && serviceTypes[serviceGroup]) {
+                serviceTypes[serviceGroup].forEach(service => {
+                    const option = document.createElement('option');
+                    option.value = service.value;
+                    option.text = service.text;
+                    serviceTypeSelect.appendChild(option);
+                });
+            } else {
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.text = 'Select a Service Group first';
+                serviceTypeSelect.appendChild(defaultOption);
+                serviceTypeSelect.disabled = true;
+            }
+        }
+    </script>
+<%- include("partials/footer") %>
+</body>
+</html>

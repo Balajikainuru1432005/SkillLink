@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/css/navstyle.css">
+<link rel="stylesheet" href="/css/footstyle.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller FAQs</title>
+    <link rel="stylesheet" href="/css/styles_foot.css">
+</head>
+<body>
+<%- include("partials/navbar") %>
+
+    <nav>
+        <div class="navbar">
+            <!-- Left Section (Logo + Name + Home) -->
+            <div class="nav-left">
+                <img src="/images/SkillLink_logo.png" alt="SkillLink Logo" class="logo"> 
+                <span class="brand-name">SkillLink</span>
+                <a href="/" class="nav-link">Home</a>
+            </div>
+    
+            <!-- Right Section (Dropdown + Conditional Content) -->
+            <div class="nav-right">
+                <!-- Dropdown for Services -->
+                <div class="dropdown">
+                    <button class="dropbtn">All Services ▼</button>
+                    <div class="dropdown-content">
+                        <a href="/services">Services</a>
+                        <a href="/supplies">Supplies</a>
+                    </div>
+                </div>
+    
+                <!-- Conditional Login/Signup or Hamburger Menu -->
+                <div id="auth-section">
+                    <!-- Default state: Login/Signup button -->
+                    <a href="//public/login" class="btn" id="login-signup-btn">Login/Signup</a>
+                    <!-- Logged-in state: Hamburger menu (hidden by default) -->
+                    <div class="hamburger-menu" id="hamburger-menu" style="display: none;">
+                        <div class="hamburger-icon">☰</div>
+                        <div class="menu-content">
+                            <a href="/customer_dashboard" class="dashboard-link">Dashboard</a>
+                            <span class="close-menu">X</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div 
+     style="background-image: url('https://res.cloudinary.com/liaison-inc/image/upload/c_fill,f_auto,q_auto/services/homeguide/backgrounds/home-theater-system-repair-or-service.jpg')"; /* Replace with your banner image */
+    class="header-image">
+        <h1>Seller FAQs</h1>
+</div>
+    <div class="container">
+        <h1>Seller FAQs</h1>
+        <p>Find answers to common questions about selling on SkillLink.</p>
+
+        <h2>How do I register as a seller?</h2>
+        <p>Simply fill out our registration form and verify your documents.</p>
+
+        <h2>How do I get paid?</h2>
+        <p>Payments are processed securely and transferred to your bank account.</p>
+
+        <h2>Can I set my own rates?</h2>
+        <p>Yes, you have full control over your service pricing.</p>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/terms">Terms & Conditions</a></li>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                    <li><a href="/careers">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>For Customers</h3>
+                <ul>
+                    <li><a href="/reviews">Reviews</a></li>
+                    <li><a href="/categories">Categories Near You</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>For Sellers</h3>
+                <ul>
+                    <li><a href="/register-seller">Register as a Seller</a></li>
+                    <li><a href="/seller-faqs">Seller FAQs</a></li>
+                    <li><a href="/pricing-policies">Pricing & Policies</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Careers</h3>
+                <ul>
+                    <li><a href="/careers#workers">Jobs for Workers</a></li>
+                    <li><a href="/careers#sellers">Jobs for Sellers</a></li>
+                    <li><a href="/careers#developers">Jobs for Developers</a></li>
+                </ul>
+            </div>
+        </div>
+        <p>&copy; 2025 SkillLink. All Rights Reserved.</p>
+    </footer>
+<%- include("partials/footer") %>
+</body>
+</html>

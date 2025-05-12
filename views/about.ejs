@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/css/navstyle.css">
+<link rel="stylesheet" href="/css/footstyle.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - SkillLink</title>
+    <link rel="stylesheet" href="/css/styles_foot.css">
+</head>
+<body>
+<%- include("partials/navbar") %>
+
+    <nav>
+        <div class="navbar">
+            <!-- Left Section (Logo + Name + Home) -->
+            <div class="nav-left">
+                <img src="/images/SkillLink_logo.png" alt="SkillLink Logo" class="logo"> 
+                <span class="brand-name">SkillLink</span>
+                <a href="/" class="nav-link">Home</a>
+            </div>
+    
+            <!-- Right Section (Dropdown + Conditional Content) -->
+            <div class="nav-right">
+                <!-- Dropdown for Services -->
+                <div class="dropdown">
+                    <button class="dropbtn">All Services ▼</button>
+                    <div class="dropdown-content">
+                        <a href="/services">Services</a>
+                        <a href="/supplies">Supplies</a>
+                    </div>
+                </div>
+    
+                <!-- Conditional Login/Signup or Hamburger Menu -->
+                <div id="auth-section">
+                    <!-- Default state: Login/Signup button -->
+                    <a href="//public/login" class="btn" id="login-signup-btn">Login/Signup</a>
+                    <!-- Logged-in state: Hamburger menu (hidden by default) -->
+                    <div class="hamburger-menu" id="hamburger-menu" style="display: none;">
+                        <div class="hamburger-icon">☰</div>
+                        <div class="menu-content">
+                            <a href="/customer_dashboard" class="dashboard-link">Dashboard</a>
+                            <span class="close-menu">X</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- Top Background Image -->
+   
+    <div style="background-image: url('https://res.cloudinary.com/liaison-inc/image/upload/c_fill,f_auto,q_auto/services/homeguide/backgrounds/home-theater-system-repair-or-service.jpg')"; /* Replace with your banner image */
+    class="header-image">
+        <h1>About Us</h1>
+    </div>
+
+    <div class="container">
+        <h2>About SkillLink</h2>
+        <p>SkillLink is a leading microjob marketplace that connects skilled workers and sellers with customers looking for reliable, high-quality services. Whether you're seeking a local handyman, a digital service, or any professional help, SkillLink makes it easier than ever to find and hire top talent.</p>
+
+        <h2>Our Story</h2>
+        <p>SkillLink was founded with the vision of making skill-based services more accessible to everyone. We noticed that many talented professionals struggled to reach customers, while people looking for services found it difficult to trust local providers. With our platform, we bridge this gap, offering a seamless and secure way to connect customers with verified service providers.</p>
+
+        <!-- Middle Image -->
+        <div 
+        style="background-image: url('https://cache.hbfiles.com/assets/about/umangoisin-73f76585538b001d3be0a3ee38c84312a52ae3411870f83fff12fe74c0b68424.jpg');"
+        class="image-container">
+            
+        </div>
+
+        
+
+        <h2>Why Choose Us?</h2>
+        <ul>
+            <li>Easy-to-use platform for customers and sellers</li>
+            <li>Verified service providers for quality assurance</li>
+            <li>Secure payment system with transparent pricing</li>
+            <li>Customer support available 24/7</li>
+        </ul>
+
+        <h2>Why Choose SkillLink?</h2>
+        <ul>
+            <li>✅ **Fast and easy service booking**</li>
+            <li>✅ **Verified professionals for every job**</li>
+            <li>✅ **Secure payment system with transparent pricing**</li>
+            <li>✅ **24/7 customer support and assistance**</li>
+            <li>✅ **Real customer reviews and ratings**</li>
+        </ul>
+
+        <h2>Customer Testimonials</h2>
+        <div class="testimonial">
+            <p>"SkillLink made it so easy to find a plumber when I had an emergency leak. The process was fast and stress-free!"</p>
+            <span>– Priya Sharma, Mumbai</span>
+        </div>
+        <div class="testimonial">
+            <p>"As a local electrician, SkillLink helped me get regular work and earn a steady income. Highly recommend for all professionals!"</p>
+            <span>– Ramesh Kumar, Delhi</span>
+        </div>
+
+        <h2>Our Core Values</h2>
+        <ul>
+            <li>✅ **Trust & Transparency** – Verified professionals & secure payments.</li>
+            <li>✅ **Customer Satisfaction** – High-quality service with a customer-first approach.</li>
+            <li>✅ **Empowerment** – Helping skilled workers gain financial independence.</li>
+            <li>✅ **Innovation** – Using technology to simplify service bookings.</li>
+        </ul>
+
+    </div>
+
+    <%- include("partials/footer") %>
+</body>
+</html>
+
+    

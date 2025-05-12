@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard | SkillLink</title>
+    <link rel="stylesheet" href="/css/seller_dashboard.css">
+    <link rel="stylesheet" href="/css/navstyleseller1.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #f4f6f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background: #2C3E50;
+            color: white;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 80px;
+            transition: all 0.3s ease;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h2 {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+        .menu-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease, padding-left 0.3s ease;
+            background: #34495E;
+            margin: 5px 10px;
+            border-radius: 8px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+        .menu-item i {
+            margin-right: 10px;
+        }
+        .menu-item:hover, .menu-item.active {
+            background: #1A73E8;
+            padding-left: 25px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 30px;
+            flex-grow: 1;
+        }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .dashboard-header h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #2C3E50;
+            margin: 0;
+        }
+        .profile-card {
+            display: flex;
+            align-items: center;
+        }
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        .seller-name {
+            font-size: 18px;
+            font-weight: 500;
+            color: #34495E;
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .section-header h3 {
+            color: #1A73E8;
+            font-size: 24px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+        .section-description {
+            color: #666;
+            font-size: 15px;
+            font-style: italic;
+            margin-bottom: 25px;
+            padding-left: 10px;
+            border-left: 3px solid #34C759;
+        }
+
+        /* Pricing Section */
+        .pricing-container {
+            padding: 25px;
+            background: linear-gradient(135deg, #f9f9f9, #eef2f7);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .category-section {
+            margin-bottom: 35px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        .category-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+        .category-section h4 {
+            color: #E67E22;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .category-section h4::after {
+            content: '';
+            width: 40px;
+            height: 3px;
+            background: #E67E22;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+        }
+        .pricing-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+        .pricing-table th {
+            background: #1A73E8;
+            color: white;
+            padding: 12px;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+        .pricing-table td {
+            padding: 15px;
+            background: #f7f9fc;
+            border-bottom: 1px solid #e0e4e8;
+            transition: background 0.3s ease;
+        }
+        .pricing-table tr:hover td {
+            background: #eef4ff;
+        }
+        .price-input {
+            width: 120px;
+            padding: 8px;
+            border: 2px solid #34C759;
+            border-radius: 6px;
+            font-size: 15px;
+            background: #fff;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .price-input:focus {
+            border-color: #1A73E8;
+            box-shadow: 0 0 8px rgba(26, 115, 232, 0.3);
+            outline: none;
+        }
+        .primary-btn {
+            background: #34C759;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 3px 10px rgba(52, 199, 89, 0.3);
+        }
+        .primary-btn:hover {
+            background: #28A745;
+            transform: scale(1.05);
+        }
+
+        /* Profile Section */
+        .profile-container {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            max-width: 700px;
+            width: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .profile-header h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #2C3E50;
+            margin: 0 0 10px 0;
+        }
+        .subtitle {
+            font-size: 16px;
+            color: #7F8C8D;
+            margin: 0;
+        }
+        .profile-details {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        .detail-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #F9FAFB;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        .detail-item:hover {
+            background: #EEF4FF;
+        }
+        .detail-item i {
+            font-size: 20px;
+            color: #1A73E8;
+            margin-right: 15px;
+        }
+        .detail-item p {
+            margin: 0;
+            font-size: 16px;
+            color: #34495E;
+        }
+        .detail-item p strong {
+            color: #2C3E50;
+            font-weight: 600;
+        }
+        .edit-btn, .save-btn, .cancel-btn, .upload-btn {
+            background: #1A73E8;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 20px;
+        }
+        .edit-btn:hover, .save-btn:hover, .upload-btn:hover {
+            background: #1557B0;
+        }
+        .cancel-btn {
+            background: #E74C3C;
+            margin-left: 10px;
+        }
+        .cancel-btn:hover {
+            background: #C0392B;
+        }
+        #edit-form-container {
+            display: none;
+        }
+        #edit-form {
+            display: grid;
+            gap: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            font-size: 14px;
+            color: #2C3E50;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 10px;
+            border: 2px solid #DDE4E6;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #1A73E8;
+            outline: none;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        fieldset {
+            border: 1px solid #DDE4E6;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        legend {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2C3E50;
+            padding: 0 10px;
+        }
+        .required {
+            color: #E74C3C;
+        }
+        .shop-images {
+            margin-top: 30px;
+        }
+        .shop-images h3 {
+            font-size: 20px;
+            color: #2C3E50;
+            margin-bottom: 15px;
+        }
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        .image-item {
+            text-align: center;
+        }
+        .image-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .image-item p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #7F8C8D;
+        }
+
+        /* Subscription Section */
+        .subscription-details {
+            padding: 25px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .subscription-details p {
+            font-size: 16px;
+            margin: 10px 0;
+            color: #34495E;
+        }
+        .subscription-details p strong {
+            color: #2C3E50;
+            font-weight: 600;
+        }
+
+        /* Settings Section */
+        .settings-container {
+            padding: 25px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .settings-btn {
+            display: block;
+            width: 200px;
+            background: #1A73E8;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            margin: 10px 0;
+            transition: background 0.3s ease;
+        }
+        .settings-btn:hover {
+            background: #1557B0;
+        }
+
+        /* Supplies Requests Section */
+        .requests-list {
+            padding: 25px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .request-item {
+            padding: 15px;
+            background: #F9FAFB;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: background 0.3s ease;
+        }
+        .request-item:hover {
+            background: #EEF4FF;
+        }
+        .request-item p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #34495E;
+        }
+        .request-item p strong {
+            color: #2C3E50;
+            font-weight: 600;
+        }
+
+        /* Earnings Section */
+        .earnings-container {
+            padding: 25px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .earnings-container p {
+            font-size: 16px;
+            margin: 10px 0;
+            color: #34495E;
+        }
+        .earnings-container p strong {
+            color: #2C3E50;
+            font-weight: 600;
+        }
+        .chart-container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 15px;
+            background: #F9FAFB;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Notifications Section */
+        .notifications-container {
+            padding: 25px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .notifications-container ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .notifications-container li {
+            padding: 15px;
+            border-bottom: 1px solid #EEE;
+            font-size: 15px;
+            color: #34495E;
+            transition: background 0.3s ease;
+        }
+        .notifications-container li:hover {
+            background: #F9FAFB;
+        }
+        .notifications-container li:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        footer {
+            background: #2C3E50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: #1A73E8;
+        }
+        footer p {
+            margin: 10px 0 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="nav-left">
+                <img src="/images/SkillLink_logo.png" alt="SkillLink Logo" class="logo">
+                <span class="brand-name">SkillLink</span>
+            </div>
+            <div class="nav-right">
+                <div class="profile-dropdown">
+                    <img src="https://cdn-icons-png.flaticon.com/256/3135/3135768.png" alt="Profile" class="profile-icon">
+                    <div class="dropdown-content">
+                        <a href="#" id="profile-link">Profile</a>
+                        <a href="/logout" id="logout-link">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="sidebar">
+        <h2>SkillLink</h2>
+        <div class="menu-item active" data-section="pricing"><i class="bx bx-money"></i> Manage Pricing</div>
+        <div class="menu-item" data-section="profile"><i class="bx bx-user"></i> Profile</div>
+        <div class="menu-item" data-section="subscription"><i class="bx bx-subscription"></i> Subscription Plan</div>
+        <div class="menu-item" data-section="settings"><i class="bx bx-cog"></i> Settings</div>
+        <div class="menu-item" data-section="supplies-requests"><i class="bx bx-package"></i> Supplies Requests</div>
+        <div class="menu-item" data-section="earnings"><i class="bx bx-line-chart"></i> Earnings</div>
+    </div>
+
+    <div class="main-content">
+        <div class="dashboard-header">
+            <h2>Seller Dashboard</h2>
+            <div class="profile-card">
+                <img src="<%= sellerProfile.profilePhoto %>" alt="Seller Profile" class="profile-pic">
+                <span class="seller-name"><%= sellerName %></span>
+            </div>
+        </div>
+
+        <div id="content-area">
+            <div id="pricing" class="content-section active">
+                <div class="section-header">
+                    <h3>Manage Your Part Pricing</h3>
+                    <button class="save-prices-btn primary-btn">Save Changes</button>
+                </div>
+                <div class="pricing-container">
+                    <p class="section-description">Set competitive prices for your electrical and plumbing parts with ease—stand out and boost your sales!</p>
+                    <div class="category-section">
+                        <h4>Electrical Parts</h4>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>Part Name</th>
+                                    <th>Price (₹)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% const electricalParts = ['Wire Bundle', 'Circuit Breaker', 'Light Switch', 'Electrical Outlet', 'LED Bulb', 'Fuse Box', 'Power Strip', 'Ceiling Fan', 'Wall Socket']; %>
+                                <% electricalParts.forEach(part => { %>
+                                    <tr>
+                                        <td><%= part %></td>
+                                        <td><input type="number" class="price-input" value="<%= sellerProfile.pricing && sellerProfile.pricing[part] ? sellerProfile.pricing[part] : '' %>" min="0" step="1" placeholder="Enter price"></td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="category-section">
+                        <h4>Plumbing Parts</h4>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>Part Name</th>
+                                    <th>Price (₹)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% const plumbingParts = ['PVC Pipe', 'Faucet', 'Pipe Fitting', 'Water Valve', 'Drain Trap', 'Shower Head', 'Sink Cartridge', 'Toilet Flapper', 'Copper Tube']; %>
+                                <% plumbingParts.forEach(part => { %>
+                                    <tr>
+                                        <td><%= part %></td>
+                                        <td><input type="number" class="price-input" value="<%= sellerProfile.pricing && sellerProfile.pricing[part] ? sellerProfile.pricing[part] : '' %>" min="0" step="1" placeholder="Enter price"></td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="profile" class="content-section">
+                <div class="section-header">
+                    <h3>Your Profile</h3>
+                </div>
+                <div id="profile-content">
+                    <div id="profile-container" class="profile-container">
+                        <div class="profile-header">
+                            <h2>Seller Profile</h2>
+                            <p class="subtitle">SkillLink Seller</p>
+                        </div>
+                        <div class="profile-details">
+                            <div class="detail-item">
+                                <i class="bx bx-user"></i>
+                                <p><strong>Name:</strong> <span id="name-display"><%= sellerProfile.name || 'Seller Name' %></span></p>
+                            </div>
+                            <div class="detail-item">
+                                <i class="bx bx-envelope"></i>
+                                <p><strong>Email:</strong> <span id="email-display"><%= sellerProfile.email || 'seller@example.com' %></span></p>
+                            </div>
+                            <div class="detail-item">
+                                <i class="bx bx-phone"></i>
+                                <p><strong>Contact:</strong> <span id="phone-display"><%= sellerProfile.professionalPhone || 'Not specified' %></span></p>
+                            </div>
+                            <div class="detail-item">
+                                <i class="bx bx-map"></i>
+                                <p><strong>Address:</strong> <span id="address-display"><%= sellerProfile.flatProfessional || '' %>, <%= sellerProfile.areaProfessional || '' %>, <%= sellerProfile.landmarkProfessional || '' %>, <%= sellerProfile.townProfessional || '' %>, <%= sellerProfile.districtProfessional || '' %>, <%= sellerProfile.stateProfessional || '' %> - <%= sellerProfile.pincodeProfessional || '' %></span></p>
+                            </div>
+                            <div class="detail-item">
+                                <i class="bx bx-store"></i>
+                                <p><strong>Parts Sold:</strong> <span id="parts-display"><% if (Array.isArray(sellerProfile.shopTypes)) { %><%= sellerProfile.shopTypes.join(', ') %><% } else { %>Not specified<% } %></span></p>
+                            </div>
+                        </div>
+                        <button id="edit-btn" class="edit-btn"><i class="bx bx-edit"></i> Edit Profile</button>
+                    </div>
+
+                    <div id="edit-form-container">
+                        <h3>Edit Profile</h3>
+                        <form id="edit-form">
+                            <div class="form-group">
+                                <label>Name <span class="required">*</span></label>
+                                <input type="text" name="name" value="<%= sellerProfile.name || '' %>" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email <span class="required">*</span></label>
+                                <input type="email" name="email" value="<%= sellerProfile.email || '' %>" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Contact <span class="required">*</span></label>
+                                <input type="tel" name="professionalPhone" value="<%= sellerProfile.professionalPhone || '' %>" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Parts Sold <span class="required">*</span></label>
+                                <input type="text" name="partsType" value="<% if (Array.isArray(sellerProfile.shopTypes)) { %><%= sellerProfile.shopTypes.join(', ') %><% } else { %>Not specified<% } %>" placeholder="e.g., Electrical, Plumbing, Hardware" required>
+                            </div>
+                            <fieldset>
+                                <legend>Professional Address Details</legend>
+                                <div class="form-group">
+                                    <label>Flat/House No. <span class="required">*</span></label>
+                                    <input type="text" name="flatProfessional" value="<%= sellerProfile.flatProfessional || '' %>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Area/Street <span class="required">*</span></label>
+                                    <input type="text" name="areaProfessional" value="<%= sellerProfile.areaProfessional || '' %>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Landmark (Optional)</label>
+                                    <input type="text" name="landmarkProfessional" value="<%= sellerProfile.landmarkProfessional || '' %>">
+                                </div>
+                                <div class="form-group">
+                                    <label>Town/City <span class="required">*</span></label>
+                                    <input type="text" name="townProfessional" value="<%= sellerProfile.townProfessional || '' %>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>District <span class="required">*</span></label>
+                                    <input type="text" name="districtProfessional" value="<%= sellerProfile.districtProfessional || '' %>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>State <span class="required">*</span></label>
+                                    <select name="stateProfessional" required>
+                                        <option value="">Select State</option>
+                                        <option value="Andhra Pradesh" <%= sellerProfile.stateProfessional === 'Andhra Pradesh' ? 'selected' : '' %>>Andhra Pradesh</option>
+                                        <option value="Telangana" <%= sellerProfile.stateProfessional === 'Telangana' ? 'selected' : '' %>>Telangana</option>
+                                        <option value="Karnataka" <%= sellerProfile.stateProfessional === 'Karnataka' ? 'selected' : '' %>>Karnataka</option>
+                                        <!-- Add more states as needed -->
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Pincode <span class="required">*</span></label>
+                                    <input type="text" name="pincodeProfessional" value="<%= sellerProfile.pincodeProfessional || '' %>" required pattern="\d{6}" maxlength="6">
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Personal Address Details</legend>
+                                <div class="form-group">
+                                    <label>Flat/House No. <span class="required">*</span></label>
+                                    <input type="text" name="flat" value="<%= sellerProfile.flat || '' %>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Area/Street <span class="required">*</span></label>
+                                    <input type="text" name="area" value="<%= sellerProfile.area || '' %>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Landmark (Optional)</label>
+                                    <input type="text" name="landmark" value="<%= sellerProfile.landmark || '' %>">
+                                </div>
+                                <div class="form-group">
+                                    <label>Town/City <span class="required">*</span></label>
+                                    <input type="text" name="town" value="<%= sellerProfile.town || '' %>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>District <span class="required">*</span></label>
+                                    <input type="text" name="district" value="<%= sellerProfile.district || '' %>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>State <span class="required">*</span></label>
+                                    <select name="state" required>
+                                        <option value="">Select State</option>
+                                        <option value="Andhra Pradesh" <%= sellerProfile.state === 'Andhra Pradesh' ? 'selected' : '' %>>Andhra Pradesh</option>
+                                        <option value="Telangana" <%= sellerProfile.state === 'Telangana' ? 'selected' : '' %>>Telangana</option>
+                                        <option value="Karnataka" <%= sellerProfile.state === 'Karnataka' ? 'selected' : '' %>>Karnataka</option>
+                                        <!-- Add more states as needed -->
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Pincode <span class="required">*</span></label>
+                                    <input type="text" name="pincode" value="<%= sellerProfile.pincode || '' %>" required pattern="\d{6}" maxlength="6">
+                                </div>
+                            </fieldset>
+                            <div class="form-actions">
+                                <button type="submit" class="save-btn">Save</button>
+                                <button type="button" id="cancel-btn" class="cancel-btn">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="shop-images">
+                        <h3>Shop Images</h3>
+                        <div id="shop-images-gallery" class="image-gallery">
+                            <% if (sellerProfile.shopImages && sellerProfile.shopImages.length > 0) { %>
+                                <% sellerProfile.shopImages.forEach((image, index) => { %>
+                                    <div class="image-item">
+                                        <img src="<%= image %>" alt="Shop Image <%= index + 1 %>">
+                                        <p>Shop Image <%= index + 1 %></p>
+                                    </div>
+                                <% }) %>
+                            <% } else { %>
+                                <p>No shop images uploaded.</p>
+                            <% } %>
+                        </div>
+                        <input type="file" id="image-upload" multiple accept="image/*">
+                        <button id="upload-images-btn" class="upload-btn">Upload Images</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="subscription" class="content-section">
+                <div class="section-header">
+                    <h3>Subscription Plan</h3>
+                </div>
+                <div class="subscription-details">
+                    <p><strong>Status:</strong> <%= subscriptionStatus %></p>
+                    <p><strong>Days Left:</strong> <%= daysLeft %> days</p>
+                    <p>Manage your subscription plan here. Stay active to continue receiving supply requests and customer orders.</p>
+                    <button class="primary-btn">Renew Subscription</button>
+                </div>
+            </div>
+
+            <div id="settings" class="content-section">
+                <div class="section-header">
+                    <h3>Settings</h3>
+                </div>
+                <div class="settings-container">
+                    <a href="/seller_profile" class="settings-btn">Update Your Profile</a>
+                    <button class="settings-btn">Change Password</button>
+                    <button id="logout-btn" class="settings-btn">Logout</button>
+                </div>
+            </div>
+
+            <div id="supplies-requests" class="content-section">
+                <div class="section-header">
+                    <h3>Supplies Requests</h3>
+                </div>
+                <div class="requests-list">
+                    <% if (supplyRequests.length === 0) { %>
+                        <p>No supply requests available.</p>
+                    <% } else { %>
+                        <% supplyRequests.forEach(request => { %>
+                            <div class="request-item">
+                                <p><strong>Category:</strong> <%= request.category %></p>
+                                <p><strong>Items:</strong> <%= request.supplies.map(item => `${item.partName} (${item.units})`).join(', ') %></p>
+                                <p><strong>Additional Notes:</strong> <%= request.additional || 'None' %></p>
+                            </div>
+                        <% }) %>
+                    <% } %>
+                </div>
+            </div>
+
+            <div id="earnings" class="content-section">
+                <div class="section-header">
+                    <h3>Earnings</h3>
+                </div>
+                <div class="earnings-container">
+                    <p><strong>Total Earnings:</strong> ₹<%= earnings.total.toFixed(2) %></p>
+                    <p><strong>Incomplete Earnings:</strong> ₹<%= earnings.incomplete.toFixed(2) %></p>
+                    <div class="chart-container">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+                <div class="notifications-container">
+                    <h3>Notifications</h3>
+                    <ul>
+                        <% if (notifications && notifications.length === 0) { %>
+                            <li>No new notifications.</li>
+                        <% } else { %>
+                            <% notifications.forEach(note => { %>
+                                <li><%= note.message %> (<%= new Date(note.created_at).toLocaleString() %>)</li>
+                            <% }) %>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div>
+            <a href="#">Terms and Conditions</a>
+            <a href="#">About Us</a>
+            <a href="#">Seller FAQs</a>
+            <a href="#">Pricing & Policy</a>
+        </div>
+        <div>
+            <p>© 2025 SkillLink. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            // Menu Navigation
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    contentSections.forEach(section => section.classList.remove('active'));
+                    const sectionId = item.getAttribute('data-section');
+                    document.getElementById(sectionId).classList.add('active');
+                });
+            });
+
+            // Profile Link in Dropdown
+            const profileLink = document.getElementById('profile-link');
+            profileLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                menuItems.forEach(i => i.classList.remove('active'));
+                contentSections.forEach(section => section.classList.remove('active'));
+                document.querySelector('[data-section="profile"]').classList.add('active');
+                document.getElementById('profile').classList.add('active');
+            });
+
+            // Logout Button
+            document.getElementById('logout-btn').addEventListener('click', () => {
+                window.location.href = '/logout';
+            });
+
+            // Save Pricing
+            document.querySelector('.save-prices-btn').addEventListener('click', async () => {
+                const pricing = {};
+                document.querySelectorAll('.price-input').forEach(input => {
+                    const partName = input.closest('tr').querySelector('td:first-child').textContent.trim();
+                    const price = parseFloat(input.value) || 0;
+                    if (price > 0) pricing[partName] = price;
+                });
+
+                try {
+                    const response = await fetch('/save-pricing', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(pricing),
+                        credentials: 'include'
+                    });
+                    const result = await response.json();
+                    if (result.success) {
+                        alert('Pricing saved successfully!');
+                    } else {
+                        alert('Error: ' + result.error);
+                    }
+                } catch (err) {
+                    console.error('Error saving pricing:', err);
+                    alert('An error occurred while saving pricing.');
+                }
+            });
+
+            // Profile Edit Form Handling
+            const profileContainer = document.getElementById('profile-container');
+            const editFormContainer = document.getElementById('edit-form-container');
+            const editBtn = document.getElementById('edit-btn');
+            const cancelBtn = document.getElementById('cancel-btn');
+            const editForm = document.getElementById('edit-form');
+
+            editBtn.addEventListener('click', () => {
+                profileContainer.style.display = 'none';
+                editFormContainer.style.display = 'block';
+            });
+
+            cancelBtn.addEventListener('click', () => {
+                profileContainer.style.display = 'block';
+                editFormContainer.style.display = 'none';
+            });
+
+            editForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(editForm);
+                const response = await fetch('/update-seller-profile', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                if (result.success) {
+                    alert('Profile updated successfully!');
+                    location.reload();
+                } else {
+                    alert('Error updating profile: ' + result.error);
+                }
+            });
+
+            // Shop Images Upload Handling
+            const imageUploadInput = document.getElementById('image-upload');
+            const uploadImagesBtn = document.getElementById('upload-images-btn');
+            const shopImagesGallery = document.getElementById('shop-images-gallery');
+
+            uploadImagesBtn.addEventListener('click', async () => {
+                const files = imageUploadInput.files;
+                if (files.length === 0) {
+                    alert('Please select at least one image to upload.');
+                    return;
+                }
+                const formData = new FormData();
+                for (let file of files) {
+                    formData.append('shopImages', file);
+                }
+                const response = await fetch('/upload-shop-images', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                if (result.success) {
+                    if (shopImagesGallery.querySelector('p')) {
+                        shopImagesGallery.innerHTML = '';
+                    }
+                    result.shopImages.forEach((src, index) => {
+                        const imageItem = document.createElement('div');
+                        imageItem.classList.add('image-item');
+                        imageItem.innerHTML = `
+                            <img src="${src}" alt="Shop Image">
+                            <p>Shop Image ${index + 1}</p>
+                        `;
+                        shopImagesGallery.appendChild(imageItem);
+                    });
+                    imageUploadInput.value = '';
+                    alert('Images uploaded successfully!');
+                } else {
+                    alert('Error uploading images: ' + result.error);
+                }
+            });
+
+            // Earnings Charts
+            const pieCtx = document.getElementById('pieChart').getContext('2d');
+            new Chart(pieCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Total Earnings', 'Incomplete Earnings'],
+                    datasets: [{
+                        data: [<%= earnings.total %>, <%= earnings.incomplete %>],
+                        backgroundColor: ['#36A2EB', '#FF6384'],
+                        borderColor: ['#fff', '#fff'],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        title: { display: true, text: 'Earnings Breakdown' }
+                    }
+                }
+            });
+
+            const lineCtx = document.getElementById('lineChart').getContext('2d');
+            new Chart(lineCtx, {
+                type: 'line',
+                data: {
+                    labels: <%= JSON.stringify(chartData.line.map(d => d.month)) %>,
+                    datasets: [{
+                        label: 'Monthly Earnings (₹)',
+                        data: <%= JSON.stringify(chartData.line.map(d => d.amount)) %>,
+                        borderColor: '#4BC0C0',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, title: { display: true, text: 'Earnings (₹)' } },
+                        x: { title: { display: true, text: 'Month' } }
+                    },
+                    plugins: {
+                        legend: { position: 'top' },
+                        title: { display: true, text: 'Monthly Earnings Trend' }
+                    }
+                }
+            });
+
+            // Supplies Requests
+            window.respondToRequest = function(requestId) {
+                window.location.href = `/suppliesform2?requestId=${requestId}`;
+            };
+        });
+    </script>
+</body>
+</html>

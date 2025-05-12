@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Profile | SkillLink</title>
+    <link rel="stylesheet" href="/css/seller_profile.css">
+    <script src="/js/seller_profile.js" defer></script>
+</head>
+<body>
+    <%- include("partials/navbar") %>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-section">
+                <img src="/images/logo.png" alt="SkillLink Logo" class="logo">
+                <h2>SkillLink</h2>
+            </div>
+            <nav>
+                <div class="menu-item">
+                    <a href="/seller_dashboard">Back to Dashboard</a>
+                </div>
+                <div class="menu-item active">
+                    <a href="/seller_profile">Profile</a>
+                </div>
+                <div class="menu-item">
+                    <a href="/part_requests">Part Requests</a>
+                </div>
+                <div class="menu-item">
+                    <a href="/subscription_plan">Subscription Plan</a>
+                </div>
+                <div class="menu-item">
+                    <a href="/settings">Settings</a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h2>Seller Profile</h2>
+            <div id="profile-content">
+                <!-- Seller Info Display -->
+                <div id="profile-display" class="profile-section">
+                    <div class="seller-image-container">
+                        <img id="seller-image" src="<%= sellerProfile.profilePhoto %>" alt="Seller Profile" class="seller-image">
+                    </div>
+                    <h2 id="seller-name"><%= sellerProfile.sellerName %></h2>
+                    <div class="profile-info">
+                        <h3>Shop Information</h3>
+                        <p><strong>Shop Name:</strong> <span id="shop-name"><%= sellerProfile.shopName %></span></p>
+                        <p><strong>Shop Address:</strong> <span id="shop-address"><%= sellerProfile.professionalAddress %></span></p>
+                        <p><strong>Seller Address:</strong> <span id="seller-address"><%= sellerProfile.personalAddress %></span></p>
+                        <p><strong>Contact:</strong> <span id="shop-contact"><%= sellerProfile.professionalPhone %></span></p>
+                        <p><strong>Email:</strong> <span id="shop-email"><%= sellerProfile.professionalEmail %></span></p>
+                        <p><strong>Parts Sold:</strong> <span id="parts-type">
+                            <% if (Array.isArray(sellerProfile.shopTypes) && sellerProfile.shopTypes.length > 0) { %>
+                                <%= sellerProfile.shopTypes.join(', ') %>
+                            <% } else { %>
+                                Not specified
+                            <% } %>
+                        </span></p>
+                        <button id="edit-profile-btn" class="edit-profile-btn">Edit Profile</button>
+                    </div>
+                </div>
+
+                <!-- Seller Info Edit Form (Hidden by Default) -->
+                <div id="profile-edit" class="profile-section hidden">
+                    <div class="seller-image-container">
+                        <img id="edit-seller-image" src="<%= sellerProfile.profilePhoto %>" alt="Seller Profile" class="seller-image">
+                        <input type="file" id="seller-image-upload" accept="image/*">
+                    </div>
+                    <h3>Edit Profile Information</h3>
+                    <form id="edit-form">
+                        <label><strong>Seller Name:</strong></label>
+                        <input type="text" id="edit-seller-name" name="sellerName" value="<%= sellerProfile.sellerName %>" required><br>
+                        <label><strong>Shop Name:</strong></label>
+                        <input type="text" id="edit-shop-name" name="shopName" value="<%= sellerProfile.shopName %>" required><br>
+                        <label><strong>Shop Address:</strong></label>
+                        <input type="text" id="edit-shop-address" name="shopAddress" value="<%= sellerProfile.professionalAddress %>" required><br>
+                        <label><strong>Seller Address:</strong></label>
+                        <input type="text" id="edit-seller-address" name="sellerAddress" value="<%= sellerProfile.personalAddress %>" required><br>
+                        <label><strong>Contact:</strong></label>
+                        <input type="text" id="edit-shop-contact" name="contact" value="<%= sellerProfile.professionalPhone %>" required><br>
+                        <label><strong>Email:</strong></label>
+                        <input type="email" id="edit-shop-email" name="email" value="<%= sellerProfile.professionalEmail %>" required><br>
+                        <label><strong>Parts Sold:</strong></label>
+                        <input type="text" id="edit-parts-type" name="partsType" value="<% if (Array.isArray(sellerProfile.shopTypes)) { %><%= sellerProfile.shopTypes.join(', ') %><% } else { %>Not specified<% } %>" required placeholder="e.g., Electrical, Plumbing, Hardware"><br>
+                        <button type="submit" class="save-btn">Save Changes</button>
+                        <button type="button" id="cancel-edit-btn" class="cancel-btn">Cancel</button>
+                    </form>
+                </div>
+
+                <!-- Shop Images Gallery -->
+                <div class="shop-images">
+                    <h3>Shop Images</h3>
+                    <div id="shop-images-gallery" class="image-gallery">
+                        <% if (sellerProfile.shopImages && sellerProfile.shopImages.length > 0) { %>
+                            <% sellerProfile.shopImages.forEach((image, index) => { %>
+                                <div class="image-item">
+                                    <img src="<%= image %>" alt="Shop Image <%= index + 1 %>">
+                                    <p>Shop Image <%= index + 1 %></p>
+                                </div>
+                            <% }) %>
+                        <% } else { %>
+                            <p>No shop images uploaded.</p>
+                        <% } %>
+                    </div>
+                    <input type="file" id="image-upload" multiple accept="image/*">
+                    <button id="upload-images-btn" class="upload-btn">Upload Images</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <%- include("partials/footer") %>
+</body>
+</html>

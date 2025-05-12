@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/css/navstyle.css">
+<link rel="stylesheet" href="/css/footstyle.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register as a Seller - SkillLink</title>
+    <link rel="stylesheet" href="/css/styles_foot.css">
+</head>
+<body>
+<%- include("partials/navbar") %>
+
+    <nav>
+        <div class="navbar">
+            <!-- Left Section (Logo + Name + Home) -->
+            <div class="nav-left">
+                <img src="/images/SkillLink_logo.png" alt="SkillLink Logo" class="logo"> 
+                <span class="brand-name">SkillLink</span>
+                <a href="/" class="nav-link">Home</a>
+            </div>
+    
+            <!-- Right Section (Dropdown + Conditional Content) -->
+            <div class="nav-right">
+                <!-- Dropdown for Services -->
+                <div class="dropdown">
+                    <button class="dropbtn">All Services ▼</button>
+                    <div class="dropdown-content">
+                        <a href="/services">Services</a>
+                        <a href="/supplies">Supplies</a>
+                    </div>
+                </div>
+    
+                <!-- Conditional Login/Signup or Hamburger Menu -->
+                <div id="auth-section">
+                    <!-- Default state: Login/Signup button -->
+                    <a href="//public/login" class="btn" id="login-signup-btn">Login/Signup</a>
+                    <!-- Logged-in state: Hamburger menu (hidden by default) -->
+                    <div class="hamburger-menu" id="hamburger-menu" style="display: none;">
+                        <div class="hamburger-icon">☰</div>
+                        <div class="menu-content">
+                            <a href="/customer_dashboard" class="dashboard-link">Dashboard</a>
+                            <span class="close-menu">X</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <div 
+ 
+    style="background-image: url('https://res.cloudinary.com/liaison-inc/image/upload/c_fill,f_auto,q_auto/services/homeguide/backgrounds/home-theater-system-repair-or-service.jpg')"; /* Replace with your banner image */
+   class="header-image">
+       <h1>Register as a Seller - SkillLink</h1>
+    
+        <h1>Register as a Seller</h1>
+        <p>Start offering your services to customers near you.</p>
+    </div>
+
+    <div class="container">
+        <section>
+            <h2>Why Sell on SkillLink?</h2>
+            <p>SkillLink connects skilled professionals with customers looking for reliable services. Get access to a large customer base, secure payments, and support.</p>
+        </section>
+
+        <section>
+            <h2>How to Get Started?</h2>
+            <ol>
+                <li>Sign up and complete your profile.</li>
+                <li>Upload necessary verification documents.</li>
+                <li>List your services and set pricing.</li>
+                <li>Receive bookings and get paid securely.</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>Start Selling Now</h2>
+            <form action="submit-seller.php" method="post">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="service">Service Category:</label>
+                <select id="service" name="service">
+                    <option>Home Cleaning</option>
+                    <option>Plumbing</option>
+                    <option>Electrician</option>
+                    <option>Carpentry</option>
+                    <option>Other</option>
+                </select>
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <button type="submit">Register as Seller</button>
+            </form>
+        </section>
+    </div>
+   
+<%- include("partials/footer") %>
+</body>
+</html>

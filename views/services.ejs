@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillLink - Services</title>
+    <link rel="stylesheet" href="/css/homestyle.css">
+    <link rel="stylesheet" href="/css/navstyle.css">
+    <link rel="stylesheet" href="/css/footstyle.css">
+</head>
+<body class="services-page">
+<%- include("partials/navbar") %>
+
+    <header>
+        <div id="navbar"></div>
+    </header>
+
+    <!-- Service Search Section -->
+    <div class="hero-section">
+        <div class="search-container">
+            <h2>Choose a service to get started.</h2>
+            <div class="search-box">
+                <input type="text" id="search-bar" placeholder='Search for a service (e.g., "electrician")' onkeyup="showSuggestions()">
+                <button>🔍</button>
+            </div>
+            <div id="search-suggestions" class="suggestions-box"></div>
+        </div>
+    </div>
+      
+    <div class="servicesection-container">
+        <div class="left-servicesection">
+            <h2>All Categories</h2>
+            <ul class="category-list">
+                <li><a href="#electrician">Electrician</a>
+                    <ul class="subcategory-list">
+                        <li><a href="#general-electrician" onclick="showCategory('general-electrician')">General Electrician</a></li>
+                        <li><a href="#appliance-electrician" onclick="showCategory('appliance-electrician')">Appliance Electrician</a></li>
+                    </ul>
+                </li>
+                <li><a href="#plumbing" onclick="showCategory('plumbing')">Plumbing</a></li>
+                <li><a href="#driver" onclick="showCategory('driver')">Driver</a></li>
+            </ul>
+        </div>
+        
+        <div class="right-servicesection">
+            <!-- General Electrician -->
+            <section id="general-electrician">
+                <h2>General Electrician</h2>
+                <div class="category-container">
+                    <div class="task-group">
+                        <img src="/images/installation_setup.jpg" alt="General Electrician">
+                        <a href="/general_electrician_service">Book Now</a>
+                    </div>
+                </div>
+            </section>
+        
+            <!-- Appliance Electrician -->
+            <section id="appliance-electrician">
+                <h2>Appliance Electrician</h2>
+                <div class="category-container">
+                    <div class="task-group">
+                        <img src="/images/cooling_refrigeration.jpg" alt="Appliance Electrician">
+                        <a href="/appliance_electrician_service">Book Now</a>
+                    </div>
+                </div>
+            </section>
+           
+            <!-- Plumber -->
+            <section id="plumbing">
+                <h2>Plumber</h2>
+                <div class="category-container">
+                    <div class="task-group">
+                        <img src="/images/repairs_fixes.jpeg" alt="Plumber">
+                        <a href="/plumbing_service">Book Now</a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Driver -->
+            <section id="driver">
+                <h2>Driver</h2>
+                <div class="category-container">
+                    <div class="task-group">
+                        <img src="/images/driver.jpg" alt="Driver">
+                        <a href="/driver_service">Book Now</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <footer>
+        <div id="footer"></div>
+    </footer>
+    <script src="/js/script.js"></script>
+<%- include("partials/footer") %>
+</body>
+</html>
