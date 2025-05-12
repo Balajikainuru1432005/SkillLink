@@ -1,0 +1,299 @@
+/* General Styling */
+body {
+    display: flex;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding-top: 80px; /* Space for fixed navbar */
+    min-height: 100vh;
+    background-color: #f8f9fa; /* Light background */
+}
+
+/* Navbar Styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px; /* Fixed navbar height */
+    background: #1e3a56; /* Dark blue background */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    padding: 0 20px;
+}
+
+/* Left side (Logo + Brand Name) */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between logo & text */
+}
+
+/* Right side (Logout Button) */
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.logout-btn {
+    background: #e74c3c;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover {
+    background: #c0392b;
+}
+
+/* Logo Styling (Rounded & Neat) */
+.logo {
+    height: 50px; /* Adjust height */
+    width: 50px; /* Make it equal for a perfect circle */
+    border-radius: 50%; /* Makes it round */
+    object-fit: cover; /* Ensures the image looks neat inside */
+    border: 2px solid white; /* Optional white border for a clean look */
+}
+
+/* Brand Name Styling */
+.brand-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #2C3E50;
+    color: white;
+    height: calc(100vh - 80px);
+    padding: 20px;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    box-sizing: border-box;
+    overflow-y: auto;
+    transition: 0.3s ease-in-out;
+}
+
+.sidebar h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.sidebar ul li:hover {
+    background: #1A252F;
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    margin-left: 250px;
+    box-sizing: border-box;
+    min-height: calc(100vh - 80px);
+}
+
+/* Dashboard Statistics */
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.stat-box {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    width: 25%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.stat-box:hover {
+    transform: scale(1.05);
+}
+
+.stat-box h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.stat-box p {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2C3E50;
+}
+
+/* Graphs */
+.charts-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+canvas {
+    max-width: 400px;
+    max-height: 300px;
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Analytics Box */
+.analytics-box {
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Content Sections */
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background: #2C3E50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background: #f4f4f4;
+}
+
+/* Remove Button Styling */
+.remove-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.remove-btn:hover {
+    background: #c0392b;
+}
+
+/* Notification */
+#notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #28a745;
+    color: white;
+    padding: 12px;
+    border-radius: 5px;
+    display: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#notification.show {
+    display: block;
+    animation: fadeOut 3s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding-top: 60px;
+    }
+
+    .navbar {
+        height: 60px;
+    }
+
+    .sidebar {
+        width: 200px;
+        top: 60px;
+        height: calc(100vh - 60px);
+    }
+
+    .main-content {
+        margin-left: 200px;
+        min-height: calc(100vh - 60px);
+    }
+
+    .stats-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stat-box {
+        width: 80%;
+        margin-bottom: 10px;
+    }
+
+    .charts-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    canvas {
+        max-width: 100%;
+        max-height: 250px;
+    }
+
+    .analytics-box {
+        width: 80%;
+    }
+}

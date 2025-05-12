@@ -1,0 +1,537 @@
+/* General Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    color: #343a40;
+    margin: 0;
+}
+
+/* Container Styling */
+.container {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 280px;
+    background: #007bff;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 2px solid #0056b3;
+}
+
+.progress-header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.progress-container {
+    width: 100%;
+    height: 10px;
+    background: #0056b3;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 10%;
+    background: white;
+    transition: width 0.3s ease-in-out;
+    border-radius: 5px;
+}
+
+.steps {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+    width: 100%;
+}
+
+.step {
+    padding: 15px 0;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: #0056b3;
+}
+
+.step.active {
+    color: #007bff;
+    font-weight: bold;
+    background: #e9ecef;
+    box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+}
+
+/* Form Content Styling */
+.form-content {
+    flex: 1;
+    padding: 40px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-step {
+    display: none;
+}
+
+.form-step.active {
+    display: block;
+}
+
+/* Input Fields Styling */
+input, select, textarea {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 16px;
+    background: #ffffff;
+    color: #495057;
+    transition: all 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border: 1px solid #80bdff;
+    box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+}
+
+/* Validation Message Styling */
+.validation-message {
+    font-size: 12px;
+    color: #dc3545;
+    margin-top: 5px;
+    display: none;
+}
+
+input.error {
+    border: 1px solid #dc3545 !important;
+    box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+}
+
+input.valid {
+    border: 1px solid #28a745 !important;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Button Styling */
+button {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: white;
+    padding: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #0069d9, #004080);
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+/* Fieldset and Legend Styling */
+fieldset {
+    border: 2px solid #ced4da;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 25px;
+    background: #ffffff;
+}
+
+legend {
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
+    padding: 5px 15px;
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+/* Name Fields Styling (First and Last Name Side by Side) */
+.name-container {
+    display: flex;
+    gap: 10px; /* Space between first and last name fields */
+}
+
+.name-field {
+    flex: 1; /* Ensures both fields take equal width */
+}
+
+/* Profile Picture Upload */
+.profile-pic-container {
+    margin-top: 20px;
+}
+
+.profile-pic-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-pic-preview {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.selfie-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #007bff;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.selfie-preview:hover {
+    border-color: #0056b3;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+.selfie-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.selfie-preview i {
+    font-size: 40px;
+    color: #007bff;
+}
+
+/* Checkbox Group Styling */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #495057;
+    transition: all 0.3s;
+}
+
+.checkbox-label:hover {
+    color: #007bff;
+}
+
+.checkbox-label input[type="checkbox"],
+.checkbox-label input[type="radio"] {
+    display: none;
+}
+
+.checkbox-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007bff;
+    border-radius: 4px;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.checkbox-label input[type="radio"] + .checkbox-custom {
+    border-radius: 50%;
+}
+
+.checkbox-custom::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 12px;
+    height: 12px;
+    background-color: #007bff;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+.checkbox-label input[type="radio"] + .checkbox-custom::after {
+    border-radius: 50%;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkbox-custom::after,
+.checkbox-label input[type="radio"]:checked + .checkbox-custom::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.checkbox-label:hover .checkbox-custom {
+    border-color: #0056b3;
+}
+
+/* Default Address Checkbox Styling */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.checkbox-container input[type="checkbox"] {
+    display: none; /* Hide the default checkbox */
+}
+
+.checkbox-container label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #495057;
+    position: relative;
+    padding-left: 35px; /* Space for custom checkbox */
+    transition: all 0.3s ease;
+}
+
+.checkbox-container label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border: 2px solid #007bff;
+    border-radius: 6px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.checkbox-container label::after {
+    content: "✓";
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #ffffff;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.checkbox-container input[type="checkbox"]:checked + label::before {
+    background-color: #007bff;
+    border-color: #007bff;
+    box-shadow: 0 2px 10px rgba(0, 119, 204, 0.3);
+}
+
+.checkbox-container input[type="checkbox"]:checked + label::after {
+    opacity: 1;
+}
+
+.checkbox-container label:hover::before {
+    border-color: #0056b3;
+    box-shadow: 0 2px 10px rgba(0, 85, 170, 0.3);
+}
+
+.checkbox-container input[type="checkbox"]:checked + label:hover::before {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Additional Checkboxes Styling */
+.additional-checkboxes {
+    margin-top: 20px;
+}
+
+.additional-checkboxes .checkbox-label {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.additional-checkboxes .checkbox-label:hover {
+    background: #e9ecef;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+        border-right: none;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    .progress-container {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .form-content {
+        padding: 20px;
+    }
+
+    .name-container {
+        flex-direction: column;
+    }
+}
+
+/* File Input Container Styling */
+.file-input-container {
+    margin-bottom: 20px;
+}
+
+.file-input {
+    display: none;
+}
+
+.file-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.file-button {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.file-button:hover {
+    background: linear-gradient(90deg, #0069d9, #004080);
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+.file-name {
+    font-size: 14px;
+    color: #495057;
+    font-style: italic;
+}
+
+/* Works Section Styling */
+.works-section {
+    margin-top: 20px;
+}
+
+.works-section ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-top: 10px;
+    display: none;
+}
+
+.works-section ul.active {
+    display: block;
+}
+
+/* Study Certificates Styling */
+.study-certificates-container {
+    margin-top: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.study-certificate-item {
+    margin-bottom: 15px;
+}
+
+.study-certificate-item label {
+    font-size: 14px;
+    color: #495057;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.study-certificate-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+.note {
+    font-size: 12px;
+    color: #dc3545;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* Price Range Container Styling */
+.price-range-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.price-range-container input {
+    width: 100px; /* Adjust width as needed */
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.price-range-container span {
+    font-size: 16px;
+    color: #495057;
+}

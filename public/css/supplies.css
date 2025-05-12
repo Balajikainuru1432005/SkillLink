@@ -1,0 +1,149 @@
+.supplies-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+    background-color: #f9f9f9;
+}
+
+.container {
+    width: 85%; /* Slightly wider for better spacing */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Keeps text and image on the same row */
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Left Section: Move text slightly to center */
+.text-content {
+    max-width: 500px;
+    margin-left: 10%; /* Moves text slightly towards the center */
+}
+
+/* Text Styling */
+.text-content h1 {
+    font-size: 5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.text-content p {
+    font-size: 2.5rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* CTA Button */
+.cta-button {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #fdb913;
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Right Section: Increase Image Width */
+.image-content img {
+    max-width: 700px; /* Increased width slightly */
+    transition: 0.3s; /* Smooth effect */
+    margin-right: 40%;
+}
+
+.image-content img:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+.why-choose-us {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+}
+
+.why-choose-us .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: auto;
+}
+
+.benefits {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 50%;
+}
+
+.benefit-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.benefit-card img {
+    width: 60px;
+    margin-bottom: 10px;
+}
+
+.benefit-card h3 {
+    font-size: 1.7rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.benefit-card p {
+    font-size: 1.4rem;
+    color: #555;
+}
+
+.why-content {
+    width: 40%;
+}
+
+.tag {
+    background: #e0e0e0;
+    padding: 6px 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 15px;
+}
+
+.why-content h2 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.why-content p {
+    font-size: 1.8rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #fdb913;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #e0a800;
+}

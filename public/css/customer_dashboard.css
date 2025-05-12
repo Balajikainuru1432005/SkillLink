@@ -1,0 +1,289 @@
+/* General */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    display: flex;
+    background: linear-gradient(135deg, #e3eef9, #d0e0f0); /* Fallback gradient */
+    background-image: url('https://english.mathrubhumi.com/image/contentid/policy:1.9878221:1725609464/home%20renovation.jpg?$p=7d21883&f=16x10&w=856&q=0.8');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: #333;
+    overflow-x: hidden;
+    min-height: 100vh; /* Ensure body covers the viewport */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background: linear-gradient(145deg, #2a2e37, #3a3e47);
+    color: #fff;
+    padding: 25px 15px;
+    min-height: calc(100vh - 60px); /* Adjust height to account for top offset */
+    position: fixed;
+    top: 60px;
+    left: 0;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    z-index: 100;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.sidebar-menu li {
+    padding: 12px 20px;
+    margin: 10px 0;
+    background: rgba(255, 255, 255, 0.1);
+    text-align: left;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: #d0d0d0;
+}
+
+.sidebar-menu li i {
+    margin-right: 10px;
+}
+
+.sidebar-menu li:hover, .sidebar-menu li.active {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: #fff;
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(0); }
+    to { transform: translateX(5px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: 280px;
+    margin-top: 0px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0); /* Reduced opacity for better background visibility */
+    min-height: calc(100vh - 60px); /* Adjust height to account for top offset */
+    border-radius: 15px 0 0 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    /* Removed backdrop-filter to avoid additional blur */
+    animation: fadeInUp 1s ease-out;
+    z-index: 50; /* Ensure it's below sidebar but above background */
+}
+
+.main-title {
+    font-size: 36px;
+    font-weight: 700;
+    color:whitesmoke;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    animation: pulse 2s infinite;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Content Area */
+.content-area {
+    max-width: 900px;
+}
+
+.section-title {
+    font-size: 24px;
+    color: #f9fafe;
+    margin-bottom: 20px;
+    font-weight: 600;
+    border-left: 5px solid #007bff;
+    padding-left: 15px;
+    animation: slideInLeft 1s ease-out;
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Work Items */
+.work-list {
+    max-width: 100%;
+    color: #d0d0d0;
+}
+
+.work-item {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.work-item:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.work-item p {
+    margin: 8px 0;
+    font-size: 15px;
+    color: #555;
+}
+
+.work-item strong {
+    color: #2a2e37;
+}
+
+/* Divider */
+.divider {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #007bff, transparent);
+    margin: 15px 0;
+}
+
+/* Content Sections */
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+/* Buttons */
+.settings-btn, .feedback-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 10px 0 0;
+    color: white;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.settings-btn {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+}
+
+.settings-btn:hover {
+    background: linear-gradient(90deg, #0056b3, #003d80);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+.feedback-btn {
+    background: linear-gradient(90deg, #28a745, #218838);
+}
+
+.feedback-btn:hover {
+    background: linear-gradient(90deg, #218838, #1a662c);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+}
+
+/* Feedback Container */
+.feedback-container {
+    margin-top: 15px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.feedback-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.feedback-input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.rating-input {
+    width: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.rating-input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.submit-feedback-btn {
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #28a745, #218838);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.submit-feedback-btn:hover {
+    background: linear-gradient(90deg, #218838, #1a662c);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+        top: 50px;
+    }
+    .main-content {
+        margin-left: 220px;
+        margin-top: 50px;
+        padding: 20px;
+    }
+    .main-title {
+        font-size: 28px;
+    }
+    .section-title {
+        font-size: 20px;
+    }
+    .work-item {
+        padding: 15px;
+    }
+}

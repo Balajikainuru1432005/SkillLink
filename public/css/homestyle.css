@@ -1,0 +1,991 @@
+/* Import Stylish Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0px;
+    background-color: #333;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    height: 30px;
+    position: fixed; /* Fix navbar at the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures it stays above everything */
+}
+
+/* Prevent content from going under navbar */
+body {
+    padding-top: 60px; /* Adjust based on navbar height */
+}
+html {
+    scroll-behavior: smooth;
+}
+
+:target {
+    scroll-margin-top: 60px; /* Adjust based on navbar height */
+}
+
+/* Left Section (Logo + Name + Home) */
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+/* Logo inside a Sphere */
+.logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 3px solid white;  /* Gives it a spherical look */
+    object-fit: cover;
+    margin-right: 10px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* SkillLink Text in Stylish Font */
+.brand-name {
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Poppins', cursive;
+    margin-right: 20px;
+    color: #dce7f2;  /* Golden color for premium look */
+    text-shadow: 2px 2px 5px rgba(255, 215, 0, 0.3);
+}
+
+/* Home Button */
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 15px;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+/* Right Section (Dropdown + Buttons) */
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Dropdown */
+
+.dropbtn {
+    background-color: transparent;
+    color: white;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    padding: 8px 15px;
+}
+
+
+.dropdown-content a {
+    display: block;
+    padding: 12px 15px;
+    color: black;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+.dropdown {
+    position: relative; /* Keeps the dropdown in place */
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute; /* Fixes dropdown positioning */
+    background-color: white;
+    min-width: 220px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 1000; /* Ensures it appears above other elements */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Buttons */
+.btn {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    margin-left: 15px;
+    border: 1px solid white;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: white;
+    color: #333;
+}
+
+
+.btn-secondary:hover {
+    background-color: white;
+}
+
+
+.footer-section {
+    text-align: center; /* ✅ Centers text inside each section */
+}
+
+.footer-section h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #c2b392;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+/* Ensuring uniform spacing for list items */
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+    padding: 5px 0;
+    transition: 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #f8c146;
+    text-decoration: underline;
+}
+
+
+.footer-section ul li a:hover {
+    color: #000;
+}
+/* Match Footer with Header */
+footer {
+    background-color: #333; /* Same as navbar */
+    color: white; /* Same as navbar */
+    font-family: 'Poppins', sans-serif; /* Same as navbar */
+    padding: 40px 10%;
+}
+
+/* Footer Headings - Bigger, Bolder, and Spaced */
+.footer-section h3 {
+    font-size: 20px; /* Bigger than normal text */
+    font-weight: 700; /* Extra bold */
+    color: #c2b392; /* Golden color for visibility */
+    text-transform: uppercase; /* Make it stand out */
+    margin-bottom: 15px;
+    letter-spacing: 1px; /* Slight spacing */
+}
+
+/* Footer Links - More readable and stylish */
+.footer-section ul li a {
+    color: white; /* White text */
+    font-size: 16px; /* Slightly bigger */
+    font-weight: 500; /* Medium weight */
+    transition: 0.3s;
+    display: block; /* Ensures spacing */
+    padding: 3px 0;
+}
+
+.footer-section ul li a:hover {
+    color: #f8c146; /* Matches the heading */
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Footer Normal Text */
+.footer-bottom {
+    color: #ccc; /* Light gray for subtlety */
+    font-size: 14px;
+    text-align: center;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Soft separator */
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.social-icons a {
+    font-size: 20px;
+    color: #555;
+}
+
+.social-icons a:hover {
+    color: #000;
+}
+
+.social-icons img {
+    width: 40px; /* Set fixed width */
+    height: 40px; /* Set fixed height */
+    object-fit: cover; /* Ensure consistent size */
+    border-radius: 50%; /* Makes them all circular */
+    display: inline-block;
+    vertical-align: middle; /* Align them properly */
+}
+
+
+.home-services {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 8%;  /* Added some breathing space */
+    gap: 40px;  /* Ensures space between left and right sections */
+}
+
+/* Left Section Styling */
+.left-section {
+    width: 36%;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    padding: 20px;
+    background: #fff;
+}
+
+/* Headings */
+.left-section h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.left-section h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+/* Grid for Services */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+/* Service and Product Boxes */
+.service-box, .product-box {
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #f9f9f9;
+}
+
+/* Adjust last row to take full width */
+.product-box {
+    grid-column: span 3;  /* Makes it stretch across all three columns */
+}
+
+/* Images inside the service/product boxes */
+.service-box img, .product-box img {
+    width: 100px;
+    height: 100px;
+}
+.service-box p, .product-box p {
+font-weight: bold;
+}
+
+/* Right Section Styling */
+.right-section {
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Grid that looks like a single image */
+.image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px; /* Remove space between images */
+    width: 100%;
+    height: auto;
+    border-radius: 12px; /* Rounded border for entire grid */
+    overflow: hidden; /* Ensures images fit inside */
+}
+
+/* Images should fill the grid properly */
+.image-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0; /* Prevents individual image rounding */
+}
+.how-it-works {
+    padding: 50px 10%;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.satisfaction h2 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.satisfaction .highlight {
+    color: #5c57ff; /* Highlighted color */
+}
+
+.satisfaction-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.satisfaction-item {
+    display: flex;
+    align-items: center;
+    width: 30%;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.satisfaction-icon {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+}
+
+.satisfaction-item h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.satisfaction-item p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* How It Works Section */
+.how-it-works-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    background-color: #fff4dc;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.how-it-works-image {
+    width: 45%;
+}
+
+.how-it-works-image img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.how-it-works-content {
+    width: 50%;
+}
+
+.how-it-works-content h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.steps {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between points */
+}
+
+.step {
+    font-size: 18px;
+    padding: 10px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+/* General Section Styling */
+.become-a-pro, .become-a-seller {
+    padding: 30px 10%;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+/* Container for Flex Layout */
+.pro-container, .seller-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Text Content */
+.pro-text, .seller-text {
+    font-size: 20px;
+    width: 80%;
+    text-align: left;
+}
+
+.pro-text h2, .seller-text h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.pro-text p, .seller-text p {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 20px;
+}
+/* Reduce Image Size */
+/* Reduce the height of images */
+.pro-image img, .seller-image img {
+    max-height: 300px; /* Adjust this value as needed */
+    width: auto;
+    object-fit: contain; /* Ensures the image scales properly */
+    border-radius: 8px;
+}
+
+
+/* CTA Button */
+.cta-button {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    background-color: #5c57ff; /* Highlight color */
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #3b38cc;
+}
+
+/* Image Styling */
+.pro-image, .seller-image {
+    width: 50%;
+}
+
+.pro-image img, .seller-image img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .pro-container, .seller-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .pro-text, .seller-text, .pro-image, .seller-image {
+        width: 100%;
+    }
+}
+/* Hero Section (Search Bar) */
+/* Import Premium Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+
+/* Hero Section (Search Bar) */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    background: url('https://images.squarespace-cdn.com/content/v1/65a8583b3f2bb32732bff587/63ff3986-3c95-4422-bdaa-6a373b71140d/Custom-Luxury-Home-Dallas.jpg') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 80px;
+    overflow: hidden;
+    transition: filter 0.5s ease;
+}
+
+.hero-section:hover {
+    filter: brightness(1.1); /* Subtle brightness boost */
+}
+
+.search-container {
+    background-color: white;
+    padding: 30px; /* Increased padding */
+    border-radius: 12px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+    width: 50%;
+    max-width: 600px;
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.search-container:hover {
+    transform: translateY(-8px); /* More pronounced lift */
+    box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+}
+
+.search-box {
+    display: flex;
+    width: 100%;
+    border: 2px solid #ddd; /* Thicker border */
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-box:hover {
+    border-color: #1aace2;
+    box-shadow: 0px 4px 10px rgba(26, 172, 226, 0.2); /* Glow effect */
+}
+
+.search-box input {
+    flex: 1;
+    padding: 14px; /* Increased padding */
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    outline: none;
+    transition: padding-left 0.3s ease, background-color 0.3s ease;
+}
+
+.search-box input:focus {
+    padding-left: 20px;
+    background-color: #f9f9f9; /* Subtle highlight */
+}
+
+.search-box button {
+    background-color: #1aace2;
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-box button:hover {
+    background-color: #148db3;
+    transform: scale(1.08);
+    box-shadow: 0px 4px 12px rgba(20, 141, 179, 0.3); /* Glow effect */
+}
+
+.suggestions-box {
+    position: absolute;
+    width: 50%;
+    max-width: 600px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+    animation: slideDown 0.4s ease-out;
+}
+
+.suggestions-box div {
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease, padding-left 0.3s ease, color 0.3s ease;
+}
+
+.suggestions-box div:hover {
+    background: #1aace2;
+    padding-left: 18px;
+    color: white; /* White text on hover */
+}
+
+/* Slide-down animation */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Main Container */
+.servicesection-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    gap: 30px;
+}
+
+/* Left Sidebar Adjustments (All Categories Section) */
+.left-servicesection {
+    width: 280px;
+    background-color: #f8f9fa;
+    padding: 25px; /* Increased padding */
+    border-right: 2px solid #ddd;
+    position: sticky;
+    top: 80px;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.left-servicesection:hover {
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px); /* Subtle lift */
+}
+
+.left-servicesection h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px; /* Slightly larger */
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: #333;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.left-servicesection:hover h2 {
+    color: #007bff;
+    transform: scale(1.05); /* Slight scale-up */
+}
+
+.left-servicesection ul {
+    list-style: none;
+    padding: 0;
+}
+
+.left-servicesection ul li {
+    margin-bottom: 12px;
+}
+
+.left-servicesection ul li a {
+    text-decoration: none;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+    padding: 10px 12px; /* Increased padding */
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.left-servicesection ul li a:hover {
+    background-color: #007bff;
+    color: white;
+    transform: translateX(8px) scale(1.02); /* Slide and subtle zoom */
+    box-shadow: 0px 4px 12px rgba(0, 123, 255, 0.3); /* Professional glow */
+}
+
+/* Indent subcategories */
+.subcategory-list {
+    margin-left: 20px;
+}
+
+/* Right Section Adjustments */
+.right-servicesection {
+    flex: 1;
+    max-width: 900px;
+    text-align: left;
+    animation: fadeUp 0.6s ease-out; /* Entry animation */
+}
+
+/* Fade-up animation */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Task Categories */
+.category-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns per row */
+    gap: 30px; /* Increased gap for breathing space */
+    justify-content: center;
+}
+
+/* Default Task Box */
+.task-group {
+    background-color: #fff;
+    border-radius: 12px; /* Slightly larger radius */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px; /* Increased padding */
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s ease;
+    min-height: 350px; /* Increased height */
+    width: 100%; /* Full width within grid cell */
+    max-width: 400px; /* Increased max-width */
+    position: relative;
+    overflow: hidden;
+}
+
+.task-group::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 123, 255, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 0;
+}
+
+.task-group:hover::before {
+    opacity: 1;
+    transform: scale(1.2); /* Subtle radial glow effect */
+}
+
+.task-group:hover {
+    transform: translateY(-10px) scale(1.03); /* Lift and slight zoom */
+    box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid #007bff; /* Professional border highlight */
+}
+
+/* Task Group Image */
+.task-group img {
+    width: 100%;
+    height: 240px; /* Increased height for better visibility */
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.4s ease, filter 0.4s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.task-group:hover img {
+    transform: scale(1.08); /* More pronounced zoom */
+    filter: brightness(1.15) saturate(1.1); /* Enhanced brightness and color */
+}
+
+/* Book Now Link Styling */
+.task-group a {
+    display: inline-block;
+    margin-top: 15px; /* Increased margin */
+    padding: 10px 20px; /* Increased padding */
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px; /* Slightly larger */
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.task-group a:hover {
+    background-color: #0056b3;
+    transform: scale(1.12); /* More noticeable scale */
+    box-shadow: 0px 6px 15px rgba(0, 86, 179, 0.4); /* Stronger glow */
+}
+
+/* Driver Section Fix */
+#driver .task-group {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Footer Fix */
+.footer {
+    width: 100%;
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: relative;
+    bottom: 0;
+    transition: background-color 0.4s ease, transform 0.4s ease;
+}
+
+.footer:hover {
+    background-color: #333;
+    transform: translateY(-2px); /* Subtle lift */
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .servicesection-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left-servicesection {
+        width: 100%;
+        position: relative;
+        height: auto;
+        border-right: none;
+        margin-right: 0;
+    }
+
+    .right-servicesection {
+        width: 100%;
+        text-align: center;
+    }
+
+    .category-container {
+        grid-template-columns: repeat(2, 1fr); /* Still two columns */
+    }
+
+    .task-group {
+        max-width: 350px; /* Adjusted for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .search-container {
+        width: 80%;
+    }
+
+    .category-container {
+        grid-template-columns: 1fr; /* One column on small screens */
+    }
+
+    .task-group {
+        max-width: 400px;
+    }
+}
+/* Specific Styles for the Supplies Page (unchanged) */
+body.supplies-page {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+}
+
+/* Main Container for Supplies Page (unchanged) */
+.supplies-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+    background-image: url('background-image.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Left Section: Supplies Form (unchanged) */
+.supplies-form-container {
+    width: 48%;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Right Section: Supplies Description (unchanged) */
+.supplies-description-container {
+    width: 48%;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading Styles (unchanged) */
+.supplies-form-container h1,
+.supplies-description-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Form Styles (unchanged) */
+.supplies-form-container .form-group {
+    margin-bottom: 20px;
+}
+
+.supplies-form-container label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.supplies-form-container select,
+.supplies-form-container input[type="number"],
+.supplies-form-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Submit Button (unchanged) */
+.supplies-form-container .submit-btn {
+    background-color: #f9a825;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.supplies-form-container .submit-btn:hover {
+    background-color: #f57f17;
+}
+
+/* Product Table (unchanged) */
+.supplies-form-container .product-table {
+    margin-top: 30px;
+}
+
+.supplies-form-container .product-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.supplies-form-container .product-row .serial-no {
+    width: 40px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.supplies-form-container .product-row input[type="text"],
+.supplies-form-container .product-row input[type="number"] {
+    width: 45%;
+    padding: 8px;
+}

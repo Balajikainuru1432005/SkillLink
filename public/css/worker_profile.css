@@ -1,0 +1,242 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Body styling */
+body {
+    background-color: #f4f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #2a2e37;
+    color: white;
+    padding: 20px;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.sidebar h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #fff;
+}
+
+.sidebar .menu-item {
+    padding: 10px;
+    margin: 10px 0;
+    background: #40444b;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    display: block;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar .menu-item.active {
+    background: #007bff;
+}
+
+.sidebar .menu-item:hover {
+    background: #007bff;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 260px;
+    padding: 2rem;
+}
+
+header {
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+#profile-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Worker Image */
+.worker-image-container {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.worker-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #2c3e50;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.worker-image:hover {
+    transform: scale(1.05);
+}
+
+/* Profile Section */
+.profile-section {
+    margin-bottom: 2rem;
+}
+
+.profile-section h3 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.profile-section p {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    color: #555;
+}
+
+.profile-section p strong {
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+/* Edit Form */
+#edit-form label {
+    display: block;
+    font-size: 1rem;
+    color: #2c3e50;
+    margin: 0.5rem 0 0.2rem;
+    font-weight: 500;
+}
+
+#edit-form input[type="text"],
+#edit-form input[type="email"],
+#edit-form input[type="file"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+#edit-form input[type="text"]:focus,
+#edit-form input[type="email"]:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Buttons */
+.edit-btn, .save-btn, .cancel-btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.edit-btn, .save-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.edit-btn:hover, .save-btn:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.cancel-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #da190b;
+    transform: translateY(-2px);
+}
+
+/* Hidden class */
+.hidden {
+    display: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content {
+        margin-left: 210px;
+        padding: 1rem;
+    }
+
+    .worker-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-section h3 {
+        font-size: 1.3rem;
+    }
+
+    .profile-section p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 100%;
+        position: static;
+        min-height: auto;
+        padding: 1rem;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
+    #profile-content {
+        padding: 1rem;
+    }
+
+    .worker-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    .profile-section h3 {
+        font-size: 1.2rem;
+    }
+
+    .profile-section p {
+        font-size: 0.9rem;
+    }
+}

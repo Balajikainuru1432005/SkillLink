@@ -1,0 +1,221 @@
+/* Import Stylish Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0px;
+    background-color: #333;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Prevent content from going under navbar */
+body {
+    padding-top: 60px;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+:target {
+    scroll-margin-top: 60px;
+}
+
+/* Left Section (Logo + Name + Home) */
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+/* Logo inside a Sphere */
+.logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 3px solid white;
+    object-fit: cover;
+    margin-right: 10px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* SkillLink Text in Stylish Font */
+.brand-name {
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Poppins', cursive;
+    margin-right: 20px;
+    color: #dce7f2;
+    text-shadow: 2px 2px 5px rgba(255, 215, 0, 0.3);
+}
+
+/* Home Button */
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 15px;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+/* Right Section (Dropdown + Button) */
+.nav-right {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 15px;
+    min-width: 250px;
+}
+
+/* Dropdown */
+.dropbtn {
+    background-color: transparent;
+    color: white;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    padding: 8px 15px;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 12px 15px;
+    color: black;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 0px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Single Login/Signup Button */
+.btn {
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    font-size: 16px;
+    border: 1px solid white;
+    border-radius: 5px;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    background-color: white;
+    color: #333;
+}
+
+/* Hamburger Menu Styles (Improved) */
+.hamburger-menu {
+    position: relative;
+    cursor: pointer;
+    margin-left: auto; /* Pushes it to the right */
+    padding: 5px 15px; /* Adds padding for better click area */
+}
+
+.hamburger-icon {
+    font-size: 28px; /* Slightly larger for visibility */
+    color: white;
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.hamburger-icon:hover {
+    color: #ddd; /* Lighter color on hover */
+}
+
+.menu-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: white;
+    min-width: 150px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 1000;
+    padding: 5px 0; /* Adds internal padding */
+}
+
+.hamburger-menu:hover .menu-content {
+    display: block;
+}
+
+.menu-content a {
+    display: block;
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    font-size: 16px; /* Consistent font size */
+}
+
+.menu-content a:hover {
+    background-color: #f0f0f0; /* Softer hover background */
+}
+
+.close-menu {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 18px;
+    color: #333;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.close-menu:hover {
+    color: #555; /* Darker color on hover */
+}
+
+/* Ensure the btn class remains for Login/Signup button */
+.btn {
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    font-size: 16px;
+    border: 1px solid white;
+    border-radius: 5px;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    background-color: white;
+    color: #333;
+}
