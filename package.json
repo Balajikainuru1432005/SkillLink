@@ -1,0 +1,25 @@
+{
+  "name": "webproj",
+  "version": "1.0.0",
+  "main": "Sellers.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "formidable": "^3.5.4",
+    "mongoose": "^8.14.1",
+    "multer": "^1.4.5-lts.2",
+    "sqlite3": "^5.1.7"
+  }
+}
